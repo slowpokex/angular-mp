@@ -21,6 +21,6 @@ production:
     - apt-get update -qy
     - apt-get install -y ruby-dev
     - gem install dpl
-    - dpl --provider=heroku --app=my-first-nodejs --api-key=XXXXXXXXXX
+    - dpl --provider=heroku --app=angular-mp --api-key=XXXXXXXXXX
   only:
     - master
