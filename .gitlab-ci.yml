@@ -12,7 +12,7 @@ test:
     - npm test
   artifacts:
     paths:
-      - dist/
+      - dist/angular-mp
 
 production:
   type: deploy
