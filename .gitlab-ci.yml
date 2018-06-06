@@ -2,17 +2,17 @@ image: node:latest
 
 # Tests will be added later
 stages:
-#  - test
+  - test
   - production
 
-# test:
-#   stage: test
-#   script: 
-#     - npm install
-#     - npm test
-#   artifacts:
-#     paths:
-#       - dist/
+test:
+  stage: test
+  script: 
+    - npm install
+    - npm test
+  artifacts:
+    paths:
+      - dist/
 
 production:
   type: deploy
