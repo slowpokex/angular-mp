@@ -1,0 +1,12 @@
+.toolbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  .right-block {
+    .user-data {
+      margin: 8px;
+      font-size: 16px;
+    }
+  }
+}

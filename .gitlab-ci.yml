@@ -2,7 +2,7 @@ image: node:latest
 
 # Tests will be added later
 stages:
-  - test
+#  - test
   - production
 
 test:

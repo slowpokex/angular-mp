@@ -1,0 +1,15 @@
+<mat-toolbar>
+  <div class="toolbar">
+    <div class="left-block">
+        Memasiki
+      </div>
+      <div class="right-block">
+        <span class="user-data">Hello, {{ userName }}!</span>
+        <button mat-stroked-button [matMenuTriggerFor]="userMenu">Menu</button>
+        <mat-menu #userMenu="matMenu">
+          <button mat-menu-item>Item 1</button>
+          <button mat-menu-item>Item 2</button>
+        </mat-menu>
+      </div>
+  </div>
+</mat-toolbar>
