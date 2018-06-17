@@ -1,15 +1,16 @@
-<mat-toolbar>
-  <div class="toolbar">
-    <div class="left-block">
-        Memasiki
-      </div>
-      <div class="right-block">
-        <span class="user-data">Hello, {{ userName }}!</span>
-        <button mat-stroked-button [matMenuTriggerFor]="userMenu">Menu</button>
-        <mat-menu #userMenu="matMenu">
-          <button mat-menu-item>Item 1</button>
-          <button mat-menu-item>Item 2</button>
-        </mat-menu>
-      </div>
+<mat-toolbar class="toolbar">
+  <div class="left-block">
+    <div class="logo-block">
+      <img src="/assets/pepe_logo.png" alt="pepe_logo">
+    </div>
+    <div class="logo-description">Memasiki</div>
+  </div>
+  <div class="right-block">
+    <span class="user-data">Hello, {{ userName }}!</span>
+    <button mat-stroked-button [matMenuTriggerFor]="userMenu">Actions</button>
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item>Settings</button>
+      <button mat-menu-item>Log out</button>
+    </mat-menu>
   </div>
 </mat-toolbar>

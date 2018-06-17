@@ -2,8 +2,33 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  background: linear-gradient(to bottom right, rgb(58, 196, 138), rgb(12, 133, 1));
+  color: #fff;
+
+  .left-block {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .logo-block {
+      width: 60px;
+
+      img {
+        width: 100%;
+        transition: 0.70s;
+
+        &:hover {
+          transition: 0.70s;
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
 
   .right-block {
+    display: flex;
+    align-items: center;
+
     .user-data {
       margin: 8px;
       font-size: 16px;

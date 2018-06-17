@@ -1,6 +1,6 @@
-const app = require('./server');
+import app from './server';
 
-const PORT = process.env.PORT || 8080;
+const PORT: number = Number.parseInt(process.env.PORT) || 8080;
 
 // Starting app point
 app.listen(PORT, () => {
