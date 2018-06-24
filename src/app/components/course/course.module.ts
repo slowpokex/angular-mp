@@ -16,10 +16,12 @@ import { CourseAddComponent } from './course-add/course-add.component';
 import { CourseCardComponent } from './course-card/course-card.component';
 import { CourseListComponent } from './course-list/course-list.component';
 import { CourseSearchComponent } from './course-search/course-search.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     BrowserModule,
+    FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatButtonModule,
