@@ -1,5 +1,8 @@
 <div class="course-page">
-  <app-course-search></app-course-search>
-  <app-course-list></app-course-list>
+  <app-course-search
+    [(ngModel)]="searchQuery"
+    (searchChanged)="searchClick($event)">
+  </app-course-search>
+  <app-course-list [cardList]="cards"></app-course-list>
   <app-course-add></app-course-add>
 </div>

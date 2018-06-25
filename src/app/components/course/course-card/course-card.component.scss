@@ -4,6 +4,7 @@
   &-content {
     display: flex;
     align-items: center;
+    justify-content: space-between;
 
     &-photo {
       img {
@@ -14,6 +15,7 @@
 
   .actions {
     display: flex;
+    user-select: none;
 
     .action {
       display: flex;
