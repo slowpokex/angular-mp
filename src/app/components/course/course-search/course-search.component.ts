@@ -1,4 +1,4 @@
-import { Component, OnInit, forwardRef } from '@angular/core';
+import { Component, OnInit, forwardRef, EventEmitter, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -13,21 +13,21 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     }
   ]
 })
-export class CourseSearchComponent implements OnInit, ControlValueAccessor {
+export class CourseSearchComponent implements ControlValueAccessor {
 
   public value: string;
   public disabled = false;
 
+  @Output()
+  public searchChanged = new EventEmitter<string>();
+
   public onChange = (value: string) => {};
-  public onTouched = () => {};
+  public onTouched = (value: any) => {};
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
-
-  onSearch(event: Event): void {
-    console.log('Search', event);
+  onSearch(): void {
+    this.searchChanged.emit(this.value);
   }
 
   writeValue(obj: any): void {

@@ -17,5 +17,4 @@ export class CourseAddComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

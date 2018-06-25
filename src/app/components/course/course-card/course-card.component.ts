@@ -15,9 +15,6 @@ export class CourseCardComponent implements OnInit {
   public card: Course;
 
   @Output()
-  public cardChanged = new EventEmitter<Course>();
-
-  @Output()
   public editClick = new EventEmitter<Course>();
 
   @Output()
@@ -34,10 +31,10 @@ export class CourseCardComponent implements OnInit {
   }
 
   onDeleteCource(course: Course) {
-
+    this.deleteClick.emit(course);
   }
 
   onEditCource(course: Course) {
-
+    this.editClick.emit(course);
   }
 }
