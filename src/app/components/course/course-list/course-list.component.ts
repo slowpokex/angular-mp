@@ -24,7 +24,7 @@ export class CourseListComponent {
     console.log('Delete', course);
   }
 
-  public onAddCards() {
+  public onAddCards(event: Event) {
     console.log('Add courses');
   }
 }

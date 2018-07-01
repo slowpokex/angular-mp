@@ -21,6 +21,9 @@ module.exports = function (config) {
       reports: ['html', 'lcovonly'],
       fixWebpackSourcePaths: true
     },
+    files: [
+      { pattern: '../node_modules/@angular/material/prebuilt-themes/indigo-pink.css' }
+    ],
     reporters: ['progress', 'kjhtml'],
     port: 9876,
     colors: true,
