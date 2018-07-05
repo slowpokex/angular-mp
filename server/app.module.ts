@@ -1,13 +1,12 @@
 import { Module } from '@nestjs/common';
-import { SimpleController } from './simple.controller';
-import { ConfigService } from './config/config.service';
+
+import { CommonModule } from './modules/common/common.module';
+import { ApiModule } from './modules/api/api.module';
 
 @Module({
-  controllers: [
-    SimpleController
-  ],
-  providers: [
-    ConfigService
+  imports: [
+    CommonModule,
+    ApiModule
   ]
 })
 export class ApplicationModule {}

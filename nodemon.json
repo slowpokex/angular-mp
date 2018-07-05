@@ -1,0 +1,13 @@
+{
+  "watch": ["server"],
+  "ext": "ts",
+  "ignore": [
+    "__server__/*",
+    "server/**/*.spec.ts",
+    "e2e/*",
+    "dist/*",
+    "docs/*"
+  ],
+  "exec": "ts-node ./index.ts",
+  "delay": 2500
+}
