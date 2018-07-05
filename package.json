@@ -3,9 +3,9 @@
   "version": "0.0.2",
   "scripts": {
     "ng": "ng",
-    "prestart": "ng build --aot --prod",
     "start:server": "ts-node index.ts",
     "start": "npm run start:server",
+    "postinstall": "ng build --aot --prod",
     "dev": "ng serve",
     "build": "ng build",
     "test": "ng test --watch=false",
