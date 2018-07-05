@@ -1,0 +1,16 @@
+<div class="items-list">
+  <mat-list>
+    <app-course-card
+      *ngFor="let card of cardList"
+      [card]="card"
+      (editClick)="editCard($event)"
+      (deleteClick)="deleteCard($event)">
+    </app-course-card>
+   </mat-list>
+   <button mat-stroked-button
+      color="primary"
+      class="add-button"
+      (click)="onAddCards($event)">
+      + Add more courses
+    </button>
+</div>

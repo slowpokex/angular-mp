@@ -3,11 +3,11 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-add-item',
-  templateUrl: './add-item.component.html',
-  styleUrls: ['./add-item.component.scss']
+  selector: 'app-course-add',
+  templateUrl: './course-add.component.html',
+  styleUrls: ['./course-add.component.scss']
 })
-export class AddItemComponent implements OnInit {
+export class CourseAddComponent implements OnInit {
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
     iconRegistry.addSvgIcon(
@@ -17,5 +17,4 @@ export class AddItemComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

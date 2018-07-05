@@ -10,6 +10,6 @@ export class BreadcrumbsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log('Init breadcrumbs');
   }
-
 }
