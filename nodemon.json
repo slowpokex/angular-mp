@@ -9,5 +9,5 @@
     "docs/*"
   ],
   "exec": "ts-node ./index.ts",
-  "delay": 2500
+  "delay": 1500
 }
