@@ -1,12 +1,19 @@
-import { Controller, Get, HttpCode, Res, HttpStatus } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Res,
+  HttpStatus
+} from '@nestjs/common';
 import { join } from 'path';
-
-const COMPILED_APP_PATH = '../dist/angular-mp';
+import { ConfigService } from './config/config.service';
 
 @Controller()
 export class SimpleController {
+
+  constructor(private readonly config: ConfigService) {}
+
   @Get('/echo')
-  findAll() {
+  async findAll() {
     return 'Echo controller';
   }
 
@@ -14,6 +21,6 @@ export class SimpleController {
   async sendIndex(@Res() res) {
     return res
         .status(HttpStatus.OK)
-        .sendFile(join(__dirname, COMPILED_APP_PATH, 'index.html'));
+        .sendFile(join(__dirname, '..', this.config.getAppPath(), 'index.html'));
   }
 }
