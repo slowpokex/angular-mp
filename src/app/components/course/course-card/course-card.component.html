@@ -1,0 +1,25 @@
+<mat-card class="card">
+  <mat-card-title>{{ card?.title }}</mat-card-title>
+  <mat-card-subtitle>{{ card?.creationDate | date }}</mat-card-subtitle>
+  <mat-card-subtitle>{{ card?.duration }}</mat-card-subtitle>
+  <mat-card-content class="card-content">
+     <div class="card-content-description">
+      {{ card?.description }}
+     </div>
+     <div class="card-content-photo">
+      <img [src]="card?.photoUrl" alt="Video">
+     </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <div class="actions">
+      <div class="action edit" (click)="onEditCource(card)">
+          <mat-icon svgIcon="edit"></mat-icon>
+          <span>Edit card</span>
+      </div>
+      <div class="action delete" (click)="onDeleteCource(card)">
+          <mat-icon svgIcon="delete"></mat-icon>
+          <span>Delete card</span>
+      </div>
+    </div>
+  </mat-card-actions>
+</mat-card>

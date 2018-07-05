@@ -1,0 +1,16 @@
+<mat-toolbar class="toolbar">
+  <div class="left-block">
+    <div class="logo-block">
+      <img src="/assets/pepe_logo.png" alt="pepe_logo">
+    </div>
+    <div class="logo-description">Videoportal</div>
+  </div>
+  <div class="right-block">
+    <span class="user-data">Hello, {{ userName }}!</span>
+    <button mat-stroked-button [matMenuTriggerFor]="userMenu">Actions</button>
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item>Settings</button>
+      <button mat-menu-item>Log out</button>
+    </mat-menu>
+  </div>
+</mat-toolbar>
