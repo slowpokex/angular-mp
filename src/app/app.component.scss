@@ -1,0 +1,18 @@
+.header-section {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+.main-section {
+  position: relative;
+  top: 40px;
+  margin: 80px 0;
+}
+
+.footer-section {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}

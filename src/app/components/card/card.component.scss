@@ -1,0 +1,32 @@
+.card {
+  margin: 8px;
+
+  &-content {
+    display: flex;
+    align-items: center;
+
+    &-photo {
+      img {
+        max-height: 100px;
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+
+    .action {
+      display: flex;
+      align-items: center;
+      margin: 0 8px;
+      padding: 2px 6px 2px 2px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+      &:hover {
+        background: #ccc;
+      }
+    }
+  }
+}
