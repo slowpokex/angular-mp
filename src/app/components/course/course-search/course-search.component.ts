@@ -26,7 +26,7 @@ export class CourseSearchComponent implements ControlValueAccessor {
 
   constructor() { }
 
-  onSearch(): void {
+  onSearch(event: Event): void {
     this.searchChanged.emit(this.value);
   }
 
