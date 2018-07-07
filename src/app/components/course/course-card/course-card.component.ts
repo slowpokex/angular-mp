@@ -25,6 +25,8 @@ export class CourseCardComponent implements OnInit {
       sanitizer.bypassSecurityTrustResourceUrl('assets/icons/baseline-edit-24px.svg'));
     iconRegistry.addSvgIcon('delete',
       sanitizer.bypassSecurityTrustResourceUrl('assets/icons/baseline-delete-24px.svg'));
+    iconRegistry.addSvgIcon('rated',
+      sanitizer.bypassSecurityTrustResourceUrl('assets/icons/round-grade-24px.svg'));
   }
 
   ngOnInit() {

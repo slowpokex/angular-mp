@@ -10,7 +10,8 @@
    <button mat-stroked-button
       color="primary"
       class="add-button"
-      (click)="onAddCards($event)">
-      + Add more courses
+      (click)="onLoadCards($event)">
+      <span *ngIf="hasCards()">Load more courses</span>
+      <span *ngIf="!hasCards()">No data! Feel free to add new course</span>
     </button>
 </div>

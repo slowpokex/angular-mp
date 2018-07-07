@@ -1,4 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+
+import isEmpty from 'lodash/isEmpty';
+
 import { Course } from '../../../models/course';
 import { CoursesService } from '../courses.service';
 
@@ -15,16 +18,22 @@ export class CoursePageComponent implements OnInit, OnDestroy {
   constructor(private readonly coursesService: CoursesService) { }
 
   ngOnInit(): void {
-    this.coursesService.getAllCourses().subscribe((cards: Array<Course>) => {
-      this.cards = cards;
-    });
-    console.log('Init CourseListComponent');
+    this.coursesService
+      .getAllCourses()
+      .subscribe((cards: Array<Course>) => {
+        this.cards = cards;
+        console.log('Loaded cards!');
+      });
   }
 
   ngOnDestroy(): void {
     this.cards = [];
-    console.log('Destroy CourseListComponent');
   }
+
+  hasCourses(): boolean {
+    return !isEmpty(this.cards);
+  }
+
   searchClick(value: string) {
     console.log(value);
   }

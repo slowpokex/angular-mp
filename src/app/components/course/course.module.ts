@@ -12,14 +12,14 @@ import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 
+import { CommonModule } from '../common/common.module';
 import { CoursePageComponent } from './course-page/course-page.component';
 import { CourseAddComponent } from './course-add/course-add.component';
 import { CourseCardComponent } from './course-card/course-card.component';
 import { CourseListComponent } from './course-list/course-list.component';
 import { CourseSearchComponent } from './course-search/course-search.component';
-import { CommonModule } from '../common/common.module';
-import {CoursesService} from './courses.service';
-import {ConfigService} from '../common/config/config.service';
+import { CoursesService } from './courses.service';
+import { ConfigService } from '../common/config/config.service';
 
 @NgModule({
   imports: [

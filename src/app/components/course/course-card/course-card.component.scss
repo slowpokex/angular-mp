@@ -1,14 +1,23 @@
 .card {
   margin: 8px;
 
+  .yellow-icon {
+    color: #f7ca18;
+    float: right;
+  }
+
   &-content {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
+    &-description {
+      padding-right: 50px;
+    }
+
     &-photo {
       img {
-        max-height: 100px;
+        max-height: 128px;
       }
     }
   }

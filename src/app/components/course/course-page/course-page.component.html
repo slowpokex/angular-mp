@@ -1,5 +1,6 @@
 <div class="course-page">
   <app-course-search
+    *ngIf="hasCourses()"
     [(ngModel)]="searchQuery"
     (searchChanged)="searchClick($event)">
   </app-course-search>
