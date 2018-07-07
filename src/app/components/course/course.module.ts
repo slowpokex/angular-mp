@@ -20,6 +20,7 @@ import { CourseListComponent } from './course-list/course-list.component';
 import { CourseSearchComponent } from './course-search/course-search.component';
 import { CoursesService } from './courses.service';
 import { ConfigService } from '../common/config/config.service';
+import { PipesModule } from '../../pipes/pipes.module';
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import { ConfigService } from '../common/config/config.service';
     HttpClientModule,
     BrowserAnimationsModule,
     CommonModule,
+    PipesModule,
     MatButtonModule,
     MatMenuModule,
     MatToolbarModule,

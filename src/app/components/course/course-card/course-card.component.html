@@ -1,4 +1,4 @@
-<mat-card class="card">
+<mat-card class="card" [ngClass]="{ 'card-green': isFresh(), 'card-blue': isUpcoming() }">
   <mat-card-title>
     {{ card?.title | uppercase }}
     <mat-icon *ngIf="card?.topRated" svgIcon="rated" class="yellow-icon"></mat-icon>

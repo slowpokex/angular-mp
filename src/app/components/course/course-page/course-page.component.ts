@@ -11,8 +11,7 @@ import { CoursesService } from '../courses.service';
   styleUrls: ['./course-page.component.scss']
 })
 export class CoursePageComponent implements OnInit, OnDestroy {
-  public searchQuery: string;
-
+  public searchQuery = '';
   public cards: Array<Course>;
 
   constructor(private readonly coursesService: CoursesService) { }
@@ -32,10 +31,6 @@ export class CoursePageComponent implements OnInit, OnDestroy {
 
   hasCourses(): boolean {
     return !isEmpty(this.cards);
-  }
-
-  searchClick(value: string) {
-    console.log(value);
   }
 
   editCard(course: Course) {
