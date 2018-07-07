@@ -25,6 +25,6 @@ export class CourseListComponent {
   }
 
   public onAddCards(event: Event) {
-    console.log('Add courses');
+    console.log('Add controllers');
   }
 }

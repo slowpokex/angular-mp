@@ -8,8 +8,8 @@ import { ApiModule } from './modules/api/api.module';
 @Module({
   imports: [
     GraphQLModule,
-    CommonModule,
-    ApiModule
+    ApiModule,
+    CommonModule
   ]
 })
 export class ApplicationModule implements NestModule {

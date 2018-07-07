@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Course } from '../../../models/course';
+import { CoursesService } from '../courses.service';
 
 @Component({
   selector: 'app-course-page',
@@ -11,19 +12,12 @@ export class CoursePageComponent implements OnInit, OnDestroy {
 
   public cards: Array<Course>;
 
-  constructor() { }
+  constructor(private readonly coursesService: CoursesService) { }
 
   ngOnInit(): void {
-    this.cards = [
-      {
-        id: 1,
-        title: 'string',
-        creationDate: new Date(),
-        duration: 32132132,
-        description: 'dasdasdasdasdads',
-        photoUrl: 'https://pp.userapi.com/c633229/v633229768/32eda/ParroCv4zUw.jpg?ava=1'
-      }
-    ];
+    this.coursesService.getAllCourses().subscribe((cards: Array<Course>) => {
+      this.cards = cards;
+    });
     console.log('Init CourseListComponent');
   }
 

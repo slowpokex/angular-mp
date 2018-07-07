@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -16,7 +17,9 @@ import { CourseAddComponent } from './course-add/course-add.component';
 import { CourseCardComponent } from './course-card/course-card.component';
 import { CourseListComponent } from './course-list/course-list.component';
 import { CourseSearchComponent } from './course-search/course-search.component';
-import { FormsModule } from '@angular/forms';
+import { CommonModule } from '../common/common.module';
+import {CoursesService} from './courses.service';
+import {ConfigService} from '../common/config/config.service';
 
 @NgModule({
   imports: [
@@ -24,6 +27,7 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    CommonModule,
     MatButtonModule,
     MatMenuModule,
     MatToolbarModule,
@@ -42,6 +46,9 @@ import { FormsModule } from '@angular/forms';
     CourseSearchComponent,
     CoursePageComponent
   ],
-  providers: [],
+  providers: [
+    ConfigService,
+    CoursesService
+  ],
 })
 export class CourseModule { }

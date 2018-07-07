@@ -10,7 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
-
+import {ConfigService} from './config/config.service';
 
 
 @NgModule({
@@ -32,6 +32,8 @@ import { HeaderComponent } from './header/header.component';
     BreadcrumbsComponent,
     FooterComponent
   ],
-  providers: [],
+  providers: [
+    ConfigService
+  ]
 })
 export class CommonModule { }
