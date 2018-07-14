@@ -1,14 +1,31 @@
 .card {
   margin: 8px;
 
+  &-green {
+    border: 2px solid #2ecc71;
+  }
+
+  &-blue {
+    border: 2px solid #19b5fe;
+  }
+
+  .yellow-icon {
+    color: #f7ca18;
+    float: right;
+  }
+
   &-content {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
+    &-description {
+      padding-right: 50px;
+    }
+
     &-photo {
       img {
-        max-height: 100px;
+        max-height: 128px;
       }
     }
   }

@@ -54,10 +54,6 @@ describe('CourseCardComponent', () => {
     console.log('The component creating are correct');
   });
 
-  it('should call icon registry', () => {
-
-  });
-
   it('should have correct input', () => {
     expect(component.card.id).toEqual(course.id);
     expect(component.card.title).toEqual(course.title);

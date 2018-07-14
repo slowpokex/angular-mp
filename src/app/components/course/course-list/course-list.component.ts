@@ -1,4 +1,7 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
+
+import isEmpty from 'lodash/isEmpty';
+
 import { Course } from '../../../models/course';
 
 @Component({
@@ -16,6 +19,10 @@ export class CourseListComponent {
 
   constructor() { }
 
+  public hasCards(): boolean {
+    return !isEmpty(this.cardList);
+  }
+
   public editCard(course: Course) {
     console.log('Edit', course);
   }
@@ -24,7 +31,10 @@ export class CourseListComponent {
     console.log('Delete', course);
   }
 
-  public onAddCards(event: Event) {
-    console.log('Add controllers');
+  public onLoadCards(event: Event) {
+    if (!this.hasCards()) {
+      return;
+    }
+    console.log('Load controllers');
   }
 }

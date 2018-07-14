@@ -9,7 +9,7 @@ import { Course } from '../../../models/course';
   templateUrl: './course-card.component.html',
   styleUrls: ['./course-card.component.scss']
 })
-export class CourseCardComponent implements OnInit {
+export class CourseCardComponent {
 
   @Input()
   public card: Course;
@@ -25,9 +25,17 @@ export class CourseCardComponent implements OnInit {
       sanitizer.bypassSecurityTrustResourceUrl('assets/icons/baseline-edit-24px.svg'));
     iconRegistry.addSvgIcon('delete',
       sanitizer.bypassSecurityTrustResourceUrl('assets/icons/baseline-delete-24px.svg'));
+    iconRegistry.addSvgIcon('rated',
+      sanitizer.bypassSecurityTrustResourceUrl('assets/icons/round-grade-24px.svg'));
   }
 
-  ngOnInit() {
+  isFresh(): boolean {
+    const creationDate = this.card.creationDate.getTime();
+    return creationDate < Date.now() && creationDate >= Date.now() - (1000 * 3600 * 24 * 7 * 2);
+  }
+
+  isUpcoming(): boolean {
+    return this.card.creationDate.getTime() > Date.now();
   }
 
   onDeleteCource(course: Course) {

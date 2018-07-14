@@ -1,7 +1,10 @@
-<mat-card class="card">
-  <mat-card-title>{{ card?.title | uppercase }}</mat-card-title>
+<mat-card class="card" [ngClass]="{ 'card-green': isFresh(), 'card-blue': isUpcoming() }">
+  <mat-card-title>
+    {{ card?.title | uppercase }}
+    <mat-icon *ngIf="card?.topRated" svgIcon="rated" class="yellow-icon"></mat-icon>
+  </mat-card-title>
   <mat-card-subtitle>{{ card?.creationDate | date }}</mat-card-subtitle>
-  <mat-card-subtitle>{{ card?.duration }}</mat-card-subtitle>
+  <mat-card-subtitle>{{ card?.duration | date: 'mm:ss' }}</mat-card-subtitle>
   <mat-card-content class="card-content">
      <div class="card-content-description">
       {{ card?.description }}

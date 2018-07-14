@@ -1,4 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+
+import isEmpty from 'lodash/isEmpty';
+
 import { Course } from '../../../models/course';
 import { CoursesService } from '../courses.service';
 
@@ -8,25 +11,26 @@ import { CoursesService } from '../courses.service';
   styleUrls: ['./course-page.component.scss']
 })
 export class CoursePageComponent implements OnInit, OnDestroy {
-  public searchQuery: string;
-
+  public searchQuery = '';
   public cards: Array<Course>;
 
   constructor(private readonly coursesService: CoursesService) { }
 
   ngOnInit(): void {
-    this.coursesService.getAllCourses().subscribe((cards: Array<Course>) => {
-      this.cards = cards;
-    });
-    console.log('Init CourseListComponent');
+    this.coursesService
+      .getAllCourses()
+      .subscribe((cards: Array<Course>) => {
+        this.cards = cards;
+        console.log('Loaded cards!');
+      });
   }
 
   ngOnDestroy(): void {
     this.cards = [];
-    console.log('Destroy CourseListComponent');
   }
-  searchClick(value: string) {
-    console.log(value);
+
+  hasCourses(): boolean {
+    return !isEmpty(this.cards);
   }
 
   editCard(course: Course) {
