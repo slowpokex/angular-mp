@@ -9,7 +9,7 @@ export class ConfigService {
     let host = '';
 
     if (!environment.production) {
-      host = 'http://' + window.location.hostname + ':8888';
+      host = 'http://' + window.location.hostname + ':8080';
     }
 
     this.apiUrl = `${host}/api`;

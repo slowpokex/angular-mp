@@ -1,2 +1,2 @@
 // Starting point of application
-import './server/main';
+import 'server/main';

@@ -1,8 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { MatDialog } from '@angular/material/dialog';
 
 import { Course } from '../../../models/course';
+import { ConfirmationPopupComponent } from '../../common/confirmation-popup/confirmation-popup.component';
 
 @Component({
   selector: 'app-course-card',
@@ -20,7 +22,11 @@ export class CourseCardComponent {
   @Output()
   public deleteClick = new EventEmitter<Course>();
 
-  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+  constructor(
+    private readonly iconRegistry: MatIconRegistry,
+    private readonly sanitizer: DomSanitizer,
+    public dialog: MatDialog
+  ) {
     iconRegistry.addSvgIcon('edit',
       sanitizer.bypassSecurityTrustResourceUrl('assets/icons/baseline-edit-24px.svg'));
     iconRegistry.addSvgIcon('delete',
@@ -39,7 +45,11 @@ export class CourseCardComponent {
   }
 
   onDeleteCource(course: Course) {
-    this.deleteClick.emit(course);
+    const dialogRef = this.dialog.open(ConfirmationPopupComponent, {
+      width: '250px',
+      data: course
+    });
+    // this.deleteClick.emit(course);
   }
 
   onEditCource(course: Course) {

@@ -6,11 +6,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
-import {ConfigService} from './config/config.service';
+import { ConfigService } from './config/config.service';
+import { ConfirmationPopupComponent } from './confirmation-popup/confirmation-popup.component';
 
 
 @NgModule({
@@ -20,17 +22,20 @@ import {ConfigService} from './config/config.service';
     HttpClientModule,
     MatMenuModule,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule
   ],
   exports: [
     HeaderComponent,
     BreadcrumbsComponent,
-    FooterComponent
+    FooterComponent,
+    ConfirmationPopupComponent
   ],
   declarations: [
     HeaderComponent,
     BreadcrumbsComponent,
-    FooterComponent
+    FooterComponent,
+    ConfirmationPopupComponent
   ],
   providers: [
     ConfigService

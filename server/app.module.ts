@@ -7,15 +7,8 @@ import { ApiModule } from './modules/api/api.module';
 
 @Module({
   imports: [
-    GraphQLModule,
     ApiModule,
     CommonModule
   ]
 })
-export class ApplicationModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(graphqlExpress(req => ({ schema: {}, rootValue: req })))
-      .forRoutes('/graphql');
-  }
-}
+export class ApplicationModule {}

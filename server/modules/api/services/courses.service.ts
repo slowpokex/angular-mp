@@ -1,9 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { CourseModel } from '../models/CourseModel';
 
+import find from 'lodash/find';
+
 @Injectable()
 export class CoursesService {
-  private readonly courses = [{
+  private readonly courses: Array<CourseModel> = [{
     id: 1,
     title: 'React Native',
     creationDate: new Date(),
@@ -41,7 +43,24 @@ export class CoursesService {
     topRated: true
   }];
 
-  async getAllCourses(): Promise<Array<CourseModel>> {
+  async findAll(): Promise<Array<CourseModel>> {
     return this.courses;
+  }
+
+  async create(newCourse: CourseModel): Promise<CourseModel> {
+    this.courses.push(newCourse);
+    return newCourse;
+  }
+
+  async findById(id: number): Promise<CourseModel> {
+    return find(this.courses, ['id', id]);
+  }
+
+  async modify(id: number, modifiedCourse: CourseModel): Promise<CourseModel> {
+    return find(this.courses, ['id', id]);
+  }
+
+  async delete(id: number): Promise<CourseModel> {
+    return find(this.courses, ['id', id]);
   }
 }

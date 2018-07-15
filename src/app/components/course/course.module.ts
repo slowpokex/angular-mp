@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { CommonModule } from '../common/common.module';
 import { CoursePageComponent } from './course-page/course-page.component';
@@ -21,6 +22,7 @@ import { CourseSearchComponent } from './course-search/course-search.component';
 import { CoursesService } from './courses.service';
 import { ConfigService } from '../common/config/config.service';
 import { PipesModule } from '../../pipes/pipes.module';
+import { ConfirmationPopupComponent } from '../common/confirmation-popup/confirmation-popup.component';
 
 @NgModule({
   imports: [
@@ -36,10 +38,14 @@ import { PipesModule } from '../../pipes/pipes.module';
     MatIconModule,
     MatListModule,
     MatInputModule,
-    MatCardModule
+    MatCardModule,
+    MatDialogModule
   ],
   exports: [
     CoursePageComponent
+  ],
+  entryComponents: [
+    ConfirmationPopupComponent
   ],
   declarations: [
     CourseAddComponent,
