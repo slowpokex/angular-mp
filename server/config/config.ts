@@ -7,7 +7,7 @@ const DEFAULT_CONFIG = {
   env: process.env.NODE_ENV || 'development',
   server: {
     host: process.env.HOST || 'http://localhost',
-    port: (process.env.PORT || 8080) as number,
+    port: (process.env.PORT || 8888) as number,
   },
 };
 

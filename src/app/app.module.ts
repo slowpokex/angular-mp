@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { CourseModule } from './components/course/course.module';
 import { CommonModule } from './components/common/common.module';
+import {LoginModule} from './components/login/login.module';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { CommonModule } from './components/common/common.module';
     HttpClientModule,
     BrowserAnimationsModule,
     CommonModule,
+    LoginModule,
     CourseModule
   ],
   providers: [],

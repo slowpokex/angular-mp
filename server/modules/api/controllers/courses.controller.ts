@@ -20,19 +20,19 @@ export class CoursesController {
 
   @Get(':id')
   @HttpCode(HttpStatus.OK)
-  async findCourseById(@Param('id') id: number) {
+  async findCourseById(@Param('id') id: string) {
     return this.coursesService.findById(id);
   }
 
   @Put(':id')
   @HttpCode(HttpStatus.ACCEPTED)
-  async changeCourse(@Param('id') id: number, @Body() modifiedCourse: CourseModel) {
+  async changeCourse(@Param('id') id: string, @Body() modifiedCourse: CourseModel) {
     return this.coursesService.modify(id, modifiedCourse);
   }
 
   @Delete(':id')
-  @HttpCode(HttpStatus.NO_CONTENT)
-  async deleteCourse(@Param('id') id) {
+  @HttpCode(HttpStatus.ACCEPTED)
+  async deleteCourse(@Param('id') id: string) {
     return this.coursesService.delete(id);
   }
 }

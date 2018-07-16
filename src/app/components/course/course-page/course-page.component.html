@@ -3,6 +3,9 @@
     *ngIf="hasCourses()"
     [(ngModel)]="searchQuery">
   </app-course-search>
-  <app-course-list [cardList]="cards | orderBy | filterCard:searchQuery"></app-course-list>
+  <app-course-list
+    [cardList]="cards | orderBy | filterCard:searchQuery"
+    (editCardEvent)="editCard($event)"
+    (deleteCardEvent)="deleteCard($event)"></app-course-list>
   <app-course-add></app-course-add>
 </div>
