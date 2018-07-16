@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {UserAuthService} from '../../user/user-auth.service';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { UserAuthService } from '../../user/user-auth.service';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -13,7 +13,7 @@ export class BreadcrumbsComponent implements OnInit {
   constructor(private readonly userAuthService: UserAuthService) { }
 
   ngOnInit() {
-    this.userAuthService.isAuthenticated().then((isAuth: boolean) =>{
+    this.userAuthService.getChangeAuthSubscription().subscribe((isAuth: boolean) => {
       this.isAuthenticated = isAuth;
     });
   }

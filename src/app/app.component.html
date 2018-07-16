@@ -3,8 +3,8 @@
   <app-breadcrumbs></app-breadcrumbs>
 </div>
 <div class="main-section">
-  <!--<app-course-page></app-course-page>-->
-  <app-login-page></app-login-page>
+  <app-course-page *ngIf="isAuthenticated"></app-course-page>
+  <app-login-page *ngIf="!isAuthenticated"></app-login-page>
 </div>
 <div class="footer-section">
   <app-footer></app-footer>

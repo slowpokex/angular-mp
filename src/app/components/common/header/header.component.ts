@@ -16,16 +16,15 @@ export class HeaderComponent implements OnInit {
   constructor(private readonly userAuthService: UserAuthService) { }
 
   ngOnInit(): void {
-    this.userAuthService.isAuthenticated().then((isAuth: boolean) =>{
+    this.userAuthService.getChangeAuthSubscription().subscribe((isAuth: boolean) => {
       this.isAuthenticated = isAuth;
-    })
+    });
     this.userAuthService.getUserInfo().then((userData: User) => {
       this.currentUser = userData;
     });
   }
 
   onLogout() {
-    this.currentUser = null;
     this.isAuthenticated = false;
     this.userAuthService.logout();
   }
