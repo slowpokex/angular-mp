@@ -17,11 +17,14 @@ export class CoursePageComponent implements OnInit, OnDestroy {
   constructor(private readonly coursesService: CoursesService) { }
 
   ngOnInit(): void {
+    this.loadCards();
+  }
+
+  loadCards(): void {
     this.coursesService
       .getAllCourses()
       .subscribe((cards: Array<Course>) => {
         this.cards = cards;
-        console.log('Loaded cards!');
       });
   }
 
@@ -38,6 +41,11 @@ export class CoursePageComponent implements OnInit, OnDestroy {
   }
 
   deleteCard(course: Course) {
-    console.log(course);
+    this.coursesService
+      .deleteCourse(course.id)
+      .subscribe((deletedCourse: Course) => {
+        console.log(`The ${deletedCourse.title} has been deleted!`);
+        this.loadCards();
+      });
   }
 }

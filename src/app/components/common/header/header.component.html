@@ -5,12 +5,12 @@
     </div>
     <div class="logo-description">Videoportal</div>
   </div>
-  <div class="right-block">
-    <span class="user-data">Hello, {{ userName }}!</span>
+  <div class="right-block" *ngIf="isAuthenticated">
+    <span class="user-data">Hello, {{ currentUser?.login }}!</span>
     <button mat-stroked-button [matMenuTriggerFor]="userMenu">Actions</button>
     <mat-menu #userMenu="matMenu">
       <button mat-menu-item>Settings</button>
-      <button mat-menu-item>Log out</button>
+      <button mat-menu-item (click)="onLogout(currentUser)">Log out</button>
     </mat-menu>
   </div>
 </mat-toolbar>

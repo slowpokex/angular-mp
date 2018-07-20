@@ -14,6 +14,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { CommonModule } from '../common/common.module';
+import { UserModule } from '../user/user.module';
 import { CoursePageComponent } from './course-page/course-page.component';
 import { CourseAddComponent } from './course-add/course-add.component';
 import { CourseCardComponent } from './course-card/course-card.component';
@@ -31,6 +32,7 @@ import { ConfirmationPopupComponent } from '../common/confirmation-popup/confirm
     HttpClientModule,
     BrowserAnimationsModule,
     CommonModule,
+    UserModule,
     PipesModule,
     MatButtonModule,
     MatMenuModule,

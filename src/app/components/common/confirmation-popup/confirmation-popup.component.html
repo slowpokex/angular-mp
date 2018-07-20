@@ -1,3 +1,12 @@
-<div>
-  Are you sure?
+<div class="confirmation">
+  <div class="confirmation-message">
+    Do you really want to delete this course?
+  </div>
+  <div class="confirmation-message">
+    <strong>{{ data?.title | uppercase }}</strong>
+  </div>
+  <div class="confirmation-actions">
+    <button mat-raised-button color="warn" (click)="onSubmitClick()">Yes</button>
+    <button mat-raised-button (click)="onNoClick()">No</button>
+  </div>
 </div>

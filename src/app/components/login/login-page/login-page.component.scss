@@ -1,0 +1,22 @@
+.login-form {
+  width: 35%;
+  margin: 0 auto;
+
+  .login-content {
+    width: 100%;
+
+    &-row {
+      margin: 12px 0;
+
+      mat-form-field {
+        width: 100%;
+      }
+    }
+
+    .action-buttons {
+      & > * {
+        margin-right: 25px;
+      }
+    }
+  }
+}

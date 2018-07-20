@@ -46,10 +46,13 @@ export class CourseCardComponent {
 
   onDeleteCource(course: Course) {
     const dialogRef = this.dialog.open(ConfirmationPopupComponent, {
-      width: '250px',
+      width: '400px',
       data: course
     });
-    // this.deleteClick.emit(course);
+    dialogRef
+      .componentInstance
+      .onSubmitClickEvent
+      .subscribe((data: Course) => this.deleteClick.emit(data));
   }
 
   onEditCource(course: Course) {

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CourseModel } from '../models/CourseModel';
 
-import find from 'lodash/find';
+import { find, findIndex } from 'lodash';
 
 @Injectable()
 export class CoursesService {
@@ -52,15 +52,17 @@ export class CoursesService {
     return newCourse;
   }
 
-  async findById(id: number): Promise<CourseModel> {
-    return find(this.courses, ['id', id]);
+  async findById(id: string): Promise<CourseModel> {
+    return find(this.courses, ['id', +id]);
   }
 
-  async modify(id: number, modifiedCourse: CourseModel): Promise<CourseModel> {
-    return find(this.courses, ['id', id]);
+  async modify(id: string, modifiedCourse: CourseModel): Promise<CourseModel> {
+    return find(this.courses, ['id', +id]);
   }
 
-  async delete(id: number): Promise<CourseModel> {
-    return find(this.courses, ['id', id]);
+  async delete(id: string): Promise<CourseModel> {
+    const courseForDelete = find(this.courses, ['id', +id]);
+    this.courses.splice(findIndex(this.courses, ['id', +id]), 1);
+    return courseForDelete;
   }
 }

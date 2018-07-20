@@ -13,17 +13,47 @@ export class CoursesService {
   constructor(
     private readonly config: ConfigService,
     private readonly http: HttpClient
-  ) {
-    console.log(`${this.config.getApiUrl()}/courses`);
-  }
+  ) {}
 
-  getAllCourses(): Observable<any> {
+  getAllCourses(): Observable<Array<Course>> {
     return this.http.get(`${this.config.getApiUrl()}/courses`, {})
       .pipe(map((data: Array<Course>) => {
         return data.map((item: any) => {
           item.creationDate = new Date(Date.parse(item.creationDate));
           return item;
         });
+      }));
+  }
+
+  getCourseById(id: number): Observable<Course> {
+    return this.http.get(`${this.config.getApiUrl()}/courses/${id}`, {})
+      .pipe(map((data: any) => {
+        data.creationDate = new Date(Date.parse(data.creationDate));
+        return data;
+      }));
+  }
+
+  createCourse(courseDto: Course) {
+    return this.http.post(`${this.config.getApiUrl()}/courses`, courseDto, {})
+      .pipe(map((data: any) => {
+        data.creationDate = new Date(Date.parse(data.creationDate));
+        return data;
+      }));
+  }
+
+  updateCourse(id: number, courseDto: Course) {
+    return this.http.put(`${this.config.getApiUrl()}/courses/${id}`, courseDto, {})
+      .pipe(map((data: any) => {
+        data.creationDate = new Date(Date.parse(data.creationDate));
+        return data;
+      }));
+  }
+
+  deleteCourse(id: number) {
+    return this.http.delete(`${this.config.getApiUrl()}/courses/${id}`, {})
+      .pipe(map((data: any) => {
+        data.creationDate = new Date(Date.parse(data.creationDate));
+        return data;
       }));
   }
 }

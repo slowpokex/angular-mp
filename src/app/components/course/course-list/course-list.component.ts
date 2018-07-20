@@ -17,6 +17,12 @@ export class CourseListComponent {
   @Output()
   public cardListChanged = new EventEmitter<Array<Course>>();
 
+  @Output()
+  public editCardEvent = new EventEmitter<Course>();
+
+  @Output()
+  public deleteCardEvent = new EventEmitter<Course>();
+
   constructor() { }
 
   public hasCards(): boolean {
@@ -24,11 +30,11 @@ export class CourseListComponent {
   }
 
   public editCard(course: Course) {
-    console.log('Edit', course);
+    this.editCardEvent.emit(course);
   }
 
   public deleteCard(course: Course) {
-    console.log('Delete', course);
+    this.deleteCardEvent.emit(course);
   }
 
   public onLoadCards(event: Event) {
