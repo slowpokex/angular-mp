@@ -12,6 +12,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { CommonModule } from '../common/common.module';
 import { UserModule } from '../user/user.module';
@@ -24,6 +26,8 @@ import { CoursesService } from './courses.service';
 import { ConfigService } from '../common/config/config.service';
 import { PipesModule } from '../../pipes/pipes.module';
 import { ConfirmationPopupComponent } from '../common/confirmation-popup/confirmation-popup.component';
+import { CourseAddPageComponent } from './course-add-page/course-add-page.component';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_NATIVE_DATE_FORMATS, NativeDateAdapter} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -41,10 +45,13 @@ import { ConfirmationPopupComponent } from '../common/confirmation-popup/confirm
     MatListModule,
     MatInputModule,
     MatCardModule,
-    MatDialogModule
+    MatDialogModule,
+    MatDatepickerModule,
+    MatAutocompleteModule
   ],
   exports: [
-    CoursePageComponent
+    CoursePageComponent,
+    CourseAddPageComponent
   ],
   entryComponents: [
     ConfirmationPopupComponent
@@ -54,11 +61,14 @@ import { ConfirmationPopupComponent } from '../common/confirmation-popup/confirm
     CourseCardComponent,
     CourseListComponent,
     CourseSearchComponent,
-    CoursePageComponent
+    CoursePageComponent,
+    CourseAddPageComponent
   ],
   providers: [
     ConfigService,
-    CoursesService
+    CoursesService,
+    { provide: DateAdapter, useClass: NativeDateAdapter },
+    { provide: MAT_DATE_FORMATS, useValue: MAT_NATIVE_DATE_FORMATS }
   ],
 })
 export class CourseModule { }

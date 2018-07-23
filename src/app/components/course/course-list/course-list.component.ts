@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { Component, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
 
 import isEmpty from 'lodash/isEmpty';
 
@@ -7,7 +7,8 @@ import { Course } from '../../../models/course';
 @Component({
   selector: 'app-course-list',
   templateUrl: './course-list.component.html',
-  styleUrls: ['./course-list.component.scss']
+  styleUrls: ['./course-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CourseListComponent {
 
@@ -15,13 +16,13 @@ export class CourseListComponent {
   public cardList: Array<Course>;
 
   @Output()
-  public cardListChanged = new EventEmitter<Array<Course>>();
+  public readonly cardListChanged = new EventEmitter<Array<Course>>();
 
   @Output()
-  public editCardEvent = new EventEmitter<Course>();
+  public readonly editCardEvent = new EventEmitter<Course>();
 
   @Output()
-  public deleteCardEvent = new EventEmitter<Course>();
+  public readonly deleteCardEvent = new EventEmitter<Course>();
 
   constructor() { }
 

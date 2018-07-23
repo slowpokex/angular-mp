@@ -1,4 +1,5 @@
-<div class="course-page">
+<app-course-add-page *ngIf="onAddPage" (closeAdd)="triggerAddPage()"></app-course-add-page>
+<div class="course-page" *ngIf="!onAddPage">
   <app-course-search
     *ngIf="hasCourses()"
     [(ngModel)]="searchQuery">
@@ -7,5 +8,5 @@
     [cardList]="cards | orderBy | filterCard:searchQuery"
     (editCardEvent)="editCard($event)"
     (deleteCardEvent)="deleteCard($event)"></app-course-list>
-  <app-course-add></app-course-add>
+  <app-course-add (onOpenAdd)="triggerAddPage()"></app-course-add>
 </div>

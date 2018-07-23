@@ -11,6 +11,7 @@ import { CoursesService } from '../courses.service';
   styleUrls: ['./course-page.component.scss']
 })
 export class CoursePageComponent implements OnInit, OnDestroy {
+  public onAddPage = false;
   public searchQuery = '';
   public cards: Array<Course>;
 
@@ -30,6 +31,10 @@ export class CoursePageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.cards = [];
+  }
+
+  public triggerAddPage(): void {
+    this.onAddPage = !this.onAddPage;
   }
 
   hasCourses(): boolean {

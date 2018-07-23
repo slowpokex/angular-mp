@@ -1,13 +1,17 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-course-add',
   templateUrl: './course-add.component.html',
-  styleUrls: ['./course-add.component.scss']
+  styleUrls: ['./course-add.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CourseAddComponent implements OnInit {
+
+  @Output()
+  public readonly onOpenAdd = new EventEmitter<void>();
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
     iconRegistry.addSvgIcon(
@@ -15,6 +19,9 @@ export class CourseAddComponent implements OnInit {
         sanitizer.bypassSecurityTrustResourceUrl('assets/icons/baseline-add-24px.svg'));
   }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  openAddPage(): void {
+    this.onOpenAdd.emit();
   }
 }
