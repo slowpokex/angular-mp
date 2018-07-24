@@ -6,6 +6,12 @@
     width: 100%;
 
     &-row {
+      &-short {
+        .label {
+          margin: 12px;
+        }
+      }
+
       margin: 12px 0;
 
       mat-form-field {

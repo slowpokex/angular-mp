@@ -41,6 +41,11 @@ export class CoursePageComponent implements OnInit, OnDestroy {
     return !isEmpty(this.cards);
   }
 
+  addCard(course: Course) {
+    console.log(course);
+    this.triggerAddPage();
+  }
+
   editCard(course: Course) {
     console.log(course);
   }

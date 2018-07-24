@@ -1,4 +1,8 @@
-<app-course-add-page *ngIf="onAddPage" (closeAdd)="triggerAddPage()"></app-course-add-page>
+<app-course-add-page
+  *ngIf="onAddPage"
+  (closeAdd)="triggerAddPage()"
+  (addNewCourse)="addCard($event)">
+</app-course-add-page>
 <div class="course-page" *ngIf="!onAddPage">
   <app-course-search
     *ngIf="hasCourses()"
