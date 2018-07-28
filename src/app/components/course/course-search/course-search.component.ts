@@ -1,10 +1,11 @@
-import { Component, OnInit, forwardRef, EventEmitter, Output } from '@angular/core';
+import {Component, forwardRef, EventEmitter, Output, ChangeDetectionStrategy} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-course-search',
   templateUrl: './course-search.component.html',
   styleUrls: ['./course-search.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

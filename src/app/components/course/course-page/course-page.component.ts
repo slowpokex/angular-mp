@@ -11,6 +11,7 @@ import { CoursesService } from '../courses.service';
   styleUrls: ['./course-page.component.scss']
 })
 export class CoursePageComponent implements OnInit, OnDestroy {
+  public onAddPage = false;
   public searchQuery = '';
   public cards: Array<Course>;
 
@@ -32,8 +33,17 @@ export class CoursePageComponent implements OnInit, OnDestroy {
     this.cards = [];
   }
 
+  public triggerAddPage(): void {
+    this.onAddPage = !this.onAddPage;
+  }
+
   hasCourses(): boolean {
     return !isEmpty(this.cards);
+  }
+
+  addCard(course: Course) {
+    console.log(course);
+    this.triggerAddPage();
   }
 
   editCard(course: Course) {
