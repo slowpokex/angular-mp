@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { ConfigService } from '../common/config/config.service';
-import {Course} from '../../models/course';
+import { Course } from '../../models/course';
 
 @Injectable()
 export class CoursesService {
@@ -25,10 +25,12 @@ export class CoursesService {
       }));
   }
 
-  getCourseById(id: number): Observable<Course> {
+  getCourseById(id: string): Observable<Course> {
     return this.http.get(`${this.config.getApiUrl()}/courses/${id}`, {})
       .pipe(map((data: any) => {
-        data.creationDate = new Date(Date.parse(data.creationDate));
+        if (data.creationDate) {
+          data.creationDate = new Date(Date.parse(data.creationDate));
+        }
         return data;
       }));
   }
