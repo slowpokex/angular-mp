@@ -26,8 +26,9 @@ import { CoursesService } from './courses.service';
 import { ConfigService } from '../common/config/config.service';
 import { PipesModule } from '../../pipes/pipes.module';
 import { ConfirmationPopupComponent } from '../common/confirmation-popup/confirmation-popup.component';
-import { CourseAddPageComponent } from './course-add-page/course-add-page.component';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_NATIVE_DATE_FORMATS, NativeDateAdapter} from '@angular/material';
+import { CourseFormPageComponent } from './course-form-page/course-form-page.component';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_NATIVE_DATE_FORMATS, NativeDateAdapter } from '@angular/material';
+import { CourseRoutingModule } from './course-routing.module';
 
 @NgModule({
   imports: [
@@ -47,11 +48,12 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_NATIVE_DATE_FORMATS, NativeDateAdapte
     MatCardModule,
     MatDialogModule,
     MatDatepickerModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    CourseRoutingModule
   ],
   exports: [
     CoursePageComponent,
-    CourseAddPageComponent
+    CourseFormPageComponent
   ],
   entryComponents: [
     ConfirmationPopupComponent
@@ -62,7 +64,7 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_NATIVE_DATE_FORMATS, NativeDateAdapte
     CourseListComponent,
     CourseSearchComponent,
     CoursePageComponent,
-    CourseAddPageComponent
+    CourseFormPageComponent
   ],
   providers: [
     ConfigService,

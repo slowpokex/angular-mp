@@ -4,6 +4,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import { Course } from '../../../models/course';
 import { CoursesService } from '../courses.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-course-page',
@@ -11,11 +12,13 @@ import { CoursesService } from '../courses.service';
   styleUrls: ['./course-page.component.scss']
 })
 export class CoursePageComponent implements OnInit, OnDestroy {
-  public onAddPage = false;
   public searchQuery = '';
   public cards: Array<Course>;
 
-  constructor(private readonly coursesService: CoursesService) { }
+  constructor(
+    private readonly router: Router,
+    private readonly coursesService: CoursesService
+  ) { }
 
   ngOnInit(): void {
     this.loadCards();
@@ -34,20 +37,15 @@ export class CoursePageComponent implements OnInit, OnDestroy {
   }
 
   public triggerAddPage(): void {
-    this.onAddPage = !this.onAddPage;
+    this.router.navigate(['/course/add']);
   }
 
   hasCourses(): boolean {
     return !isEmpty(this.cards);
   }
 
-  addCard(course: Course) {
-    console.log(course);
-    this.triggerAddPage();
-  }
-
   editCard(course: Course) {
-    console.log(course);
+    this.router.navigate([`/course/${course.id}`]);
   }
 
   deleteCard(course: Course) {

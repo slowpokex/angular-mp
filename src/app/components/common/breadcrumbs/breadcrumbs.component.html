@@ -1,3 +1,7 @@
 <mat-toolbar class="breadcrumbs" *ngIf="isAuthenticated">
-  /asdasd/dasdas/dsadasda
+  <span *ngFor="let breadcrumb of $breadcrumbs | async">
+    <a routerLink="[breadcrumb.url, breadcrumb.params]">
+        {{ breadcrumb.label }}
+      </a>
+  </span>
 </mat-toolbar>

@@ -53,7 +53,7 @@ export class CoursesService {
   }
 
   async findById(id: string): Promise<CourseModel> {
-    return find(this.courses, ['id', +id]);
+    return find(this.courses, ['id', +id]) || {};
   }
 
   async modify(id: string, modifiedCourse: CourseModel): Promise<CourseModel> {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { UserAuthService } from '../../user/user-auth.service';
 import { User } from '../../user/model/user';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,10 @@ export class HeaderComponent implements OnInit {
   public currentUser: User = null;
   public isAuthenticated = false;
 
-  constructor(private readonly userAuthService: UserAuthService) { }
+  constructor(
+    private readonly router: Router,
+    private readonly userAuthService: UserAuthService
+  ) { }
 
   ngOnInit(): void {
     this.userAuthService.getChangeAuthSubscription().subscribe((isAuth: boolean) => {
@@ -26,6 +30,6 @@ export class HeaderComponent implements OnInit {
 
   onLogout() {
     this.isAuthenticated = false;
-    this.userAuthService.logout();
+    this.userAuthService.logout().then(() => this.router.navigate(['/login']));
   }
 }

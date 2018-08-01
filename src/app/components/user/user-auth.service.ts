@@ -15,12 +15,10 @@ export class UserAuthService {
 
   async login(): Promise<void> {
     this.onChangeAuth.next(this.isAuthenticatedUser = true);
-    console.log('Login user');
   }
 
   async logout(): Promise<void> {
     this.onChangeAuth.next(this.isAuthenticatedUser = false);
-    console.log('Logout user');
   }
 
   async register(): Promise<void> {
