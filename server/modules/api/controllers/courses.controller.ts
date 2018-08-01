@@ -1,8 +1,12 @@
-import { Controller, Get, HttpCode, HttpStatus, Post, Put, Delete, Param, Body } from '@nestjs/common';
+import {Controller, Get, HttpCode, HttpStatus, Post, Put, Delete, Param, Body, UseGuards} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+
 import { CoursesService } from '../services/courses.service';
-import { CourseModel } from '../models/CourseModel';
+import { CourseDto } from '../dto/course.dto';
+// import { AuthGuard } from '../../auth/auth.guard';
 
 @Controller('/api/courses/')
+@UseGuards(AuthGuard('jwt'))
 export class CoursesController {
   constructor(private readonly coursesService: CoursesService) {}
 
@@ -14,7 +18,7 @@ export class CoursesController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  async createCourse(@Body() newCourse: CourseModel) {
+  async createCourse(@Body() newCourse: CourseDto) {
     return this.coursesService.create(newCourse);
   }
 
@@ -26,7 +30,7 @@ export class CoursesController {
 
   @Put(':id')
   @HttpCode(HttpStatus.ACCEPTED)
-  async changeCourse(@Param('id') id: string, @Body() modifiedCourse: CourseModel) {
+  async changeCourse(@Param('id') id: string, @Body() modifiedCourse: CourseDto) {
     return this.coursesService.modify(id, modifiedCourse);
   }
 

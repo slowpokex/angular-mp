@@ -35,6 +35,17 @@ export class CourseFormPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+
+    if (id) {
+      this.coursesService.getCourseById(id).subscribe((course: Partial<Course>) => {
+        if (!course) {
+          return this.leaveToCoursePage();
+        }
+        this.course = course;
+      });
+    }
+
     // const id = this.route.snapshot.paramMap.get('id');
     // if (id) {
     //   this.isEditPage = true;
@@ -45,14 +56,17 @@ export class CourseFormPageComponent implements OnInit {
     //   });
     // }
     // TODO: This is also working solution
-    this.route.paramMap.pipe(
-      switchMap((params: ParamMap) => this.coursesService.getCourseById(params.get('id')))
-    ).subscribe((course: Partial<Course>) => {
-      this.isEditPage = !isEmpty(course);
-      this.createUpdateAction = (body: Course): Observable<any> =>
-        !this.isEditPage ? this.coursesService.createCourse(body) : this.coursesService.updateCourse(body.id, body);
-      this.course = course;
-    });
+    // this.route.paramMap.pipe(
+    //   switchMap((params: ParamMap) => this.coursesService.getCourseById(params.get('id')))
+    // ).subscribe((course: Partial<Course>) => {
+    //   if (!course) {
+    //     this.leaveToCoursePage();
+    //   }
+    //   this.isEditPage = !isEmpty(course);
+    //   this.createUpdateAction = (body: Course): Observable<any> =>
+    //     !this.isEditPage ? this.coursesService.createCourse(body) : this.coursesService.updateCourse(body.id, body);
+    //   this.course = course;
+    // });
   }
 
   onConfirmCourse(): void {

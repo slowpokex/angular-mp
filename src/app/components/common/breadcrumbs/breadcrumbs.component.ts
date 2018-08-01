@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserAuthService } from '../../user/user-auth.service';
+import { UserAuthService } from '../../user/services/user-auth.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import {distinctUntilChanged, filter, map} from 'rxjs/operators';
 import {Observable} from 'rxjs';

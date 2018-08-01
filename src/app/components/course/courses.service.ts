@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { map } from 'rxjs/operators';
 
-import { ConfigService } from '../common/config/config.service';
+import { ConfigService } from '../config/config.service';
 import { Course } from '../../models/course';
 
 @Injectable()
@@ -26,11 +26,11 @@ export class CoursesService {
   }
 
   getCourseById(id: string): Observable<Course> {
-    return this.http.get(`${this.config.getApiUrl()}/courses/${id}`, {})
+    return this.http.get<Course>(`${this.config.getApiUrl()}/courses/${id}`, {})
       .pipe(map((data: any) => {
-        if (data.creationDate) {
-          data.creationDate = new Date(Date.parse(data.creationDate));
-        }
+        // if (data.creationDate) {
+        //   data.creationDate = new Date(Date.parse(data.creationDate));
+        // }
         return data;
       }));
   }

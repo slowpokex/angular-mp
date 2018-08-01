@@ -37,7 +37,7 @@ export class CoursePageComponent implements OnInit, OnDestroy {
   }
 
   public triggerAddPage(): void {
-    this.router.navigate(['/course/add']);
+    this.router.navigate(['/course/new']);
   }
 
   hasCourses(): boolean {

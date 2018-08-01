@@ -5,10 +5,11 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { CourseModule } from './components/course/course.module';
-import { CommonModule } from './components/common/common.module';
+import { SharedModule } from './components/common/shared.module';
 import { LoginModule } from './components/login/login.module';
 import { ErrorModule } from './components/error/error.module';
 import { AppRoutingModule } from './app-routing.module';
+import {UserModule} from './components/user/user.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    CommonModule,
+    UserModule,
+    SharedModule,
     LoginModule,
     CourseModule,
     ErrorModule,

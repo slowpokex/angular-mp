@@ -16,7 +16,7 @@ const ROUTES: Array<Route> = [
       ROUTES,
       {
         enableTracing: !environment.production, // <-- debugging purposes only
-        useHash: true
+        useHash: false
       }
     )
   ],

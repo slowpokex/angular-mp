@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { UserAuthService } from '../../user/user-auth.service';
+import { UserAuthService } from '../../user/services/user-auth.service';
 import { User } from '../../user/model/user';
 import {Router} from '@angular/router';
 
@@ -21,6 +21,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.userAuthService.getChangeAuthSubscription().subscribe((isAuth: boolean) => {
+      console.log(isAuth);
       this.isAuthenticated = isAuth;
     });
     this.userAuthService.getUserInfo().then((userData: User) => {
@@ -30,6 +31,7 @@ export class HeaderComponent implements OnInit {
 
   onLogout() {
     this.isAuthenticated = false;
-    this.userAuthService.logout().then(() => this.router.navigate(['/login']));
+    this.userAuthService.logout()
+      .then(() => this.router.navigate(['/login']));
   }
 }
