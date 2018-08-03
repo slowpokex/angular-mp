@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {Observable, ReplaySubject, interval, Subscription} from 'rxjs';
+import { Observable, ReplaySubject, forkJoin } from 'rxjs';
 import { tap, shareReplay } from 'rxjs/operators';
 import * as moment from 'moment';
 
-import { User, UserRoleEnum } from '../model/user';
+import { User } from '../model/user';
 import { Token } from '../model/token';
 import { LoginFormData } from '../../login/interfaces/login-form.interface';
 import { HttpClient } from '@angular/common/http';
@@ -12,6 +12,7 @@ import { ConfigService } from '../../config/config.service';
 @Injectable()
 export class UserAuthService {
   private onChangeAuth = new ReplaySubject<boolean>(1);
+  private userInfo: User;
 
   constructor(
     private readonly config: ConfigService,
@@ -24,14 +25,11 @@ export class UserAuthService {
 
   async login(userData: LoginFormData): Promise<any> {
     return this.http.post(this.config.getAuthUrl(), userData)
-      .pipe(tap(this.setSession), tap(() => {
-        this.onChangeAuth.next(this.isAuthenticated());
-      }), shareReplay()).toPromise();
+      .pipe(tap(this.setSession), shareReplay()).toPromise();
   }
 
   async logout(): Promise<void> {
     this.resetSession();
-    this.onChangeAuth.next(this.isAuthenticated());
   }
 
   // TODO: Need to implement register logic
@@ -43,18 +41,22 @@ export class UserAuthService {
     return moment().isBefore(this.getExpiration());
   }
 
-  async getUserInfo(): Promise<User> {
-    return this.http.get<User>(this.config.getUserInfoUrl()).toPromise();
+  getUserInfo(): User {
+    return JSON.parse(localStorage.getItem('current_user')) as User;
   }
 
   private setSession(jwtToken: Token) {
     const expiresAt = moment().add(jwtToken.expiresIn, 'second');
 
+    localStorage.setItem('current_user', JSON.stringify(jwtToken.user));
     localStorage.setItem('access_token', jwtToken.accessToken);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt));
+
+    console.log(JSON.parse(localStorage.getItem('current_user')) as User);
   }
 
   private resetSession() {
+    localStorage.removeItem('current_user');
     localStorage.removeItem('access_token');
     localStorage.removeItem('expires_at');
   }

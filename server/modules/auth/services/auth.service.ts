@@ -31,6 +31,7 @@ export class AuthService {
     return {
       expiresIn,
       accessToken,
+      user: pickForJwtToken(user)
     };
   }
 

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
 
 import isEmpty from 'lodash/isEmpty';
 import random from 'lodash/random';
@@ -15,8 +14,6 @@ import { CoursesService } from '../courses.service';
   styleUrls: ['./course-form-page.component.scss']
 })
 export class CourseFormPageComponent implements OnInit {
-
-  private createUpdateAction: (body: Course) => Observable<any>;
   // TODO: Temporary mock data. Will be added on BE
   public users = [
     'John Doe',
@@ -27,6 +24,8 @@ export class CourseFormPageComponent implements OnInit {
 
   public isEditPage = false;
   public course: Partial<Course> = {};
+
+  private createUpdateAction = (body: Course): Observable<any> => this.coursesService.updateCourse(body.id, body);
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -43,6 +42,7 @@ export class CourseFormPageComponent implements OnInit {
           return this.leaveToCoursePage();
         }
         this.course = course;
+        this.isEditPage = !isEmpty(course);
       });
     }
 
@@ -71,9 +71,8 @@ export class CourseFormPageComponent implements OnInit {
 
   onConfirmCourse(): void {
     if (!this.isEditPage) {
-      this.course.id = random(Number.MAX_SAFE_INTEGER, false);
+      this.createUpdateAction = (body: Course): Observable<any> => this.coursesService.createCourse(body);
     }
-    console.log(this.course);
     this.createUpdateAction(this.course as Course).subscribe(() => {
       this.leaveToCoursePage();
     });

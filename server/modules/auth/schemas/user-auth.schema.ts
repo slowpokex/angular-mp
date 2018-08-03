@@ -2,7 +2,7 @@ import * as mongoose from 'mongoose';
 import { pbkdf2Sync, randomBytes } from 'crypto';
 import { random } from 'lodash';
 
-import { UserAuthModel } from '../models/user-auth.model';
+import { UserAuthModel, UserRoleEnum } from '../models/user-auth.model';
 
 const UserAuthSchema = new mongoose.Schema({
   _id: {
@@ -27,7 +27,7 @@ const UserAuthSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['GUEST', 'USER', 'MODERATOR', 'ADMIN'],
+    enum: Object.keys(UserRoleEnum),
     default: 'GUEST',
   },
   hash : String,

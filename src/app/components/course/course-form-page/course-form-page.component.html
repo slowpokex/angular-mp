@@ -47,16 +47,6 @@
         </mat-form-field>
         <span class="label">{{ course.duration | date: 'mm:ss' }}</span>
       </div>
-      <div>
-        <mat-form-field>
-          <input type="text" placeholder="Assignee" aria-label="Assignee" matInput [matAutocomplete]="auto">
-          <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let user of users" [value]="user">
-              {{ user }}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-      </div>
       <div class="action-buttons">
         <button mat-raised-button color="primary" (click)="onConfirmCourse()">{{ isEditPage ? 'Edit': 'Add' }} course</button>
         <button mat-raised-button color="warn" (click)="onBack()">Back to course</button>
