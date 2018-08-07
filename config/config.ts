@@ -10,7 +10,7 @@ const DEFAULT_CONFIG = {
     port: (process.env.PORT || 8080) as number,
   },
   mongo: {
-    uri: process.env.MONDODB_URI || 'mongodb://localhost:27017/userdb', // <- Test connection
+    uri: process.env.MONGODB_URI || 'mongodb://localhost:27017/userdb', // <- Test connection
   },
   security: {
     secretKey: process.env.JWT_SECRET_KEY || 'angular-nest-app', // <- Default secret
