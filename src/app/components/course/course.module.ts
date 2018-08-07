@@ -14,6 +14,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { SharedModule } from '../common/shared.module';
 import { ConfigModule } from '../config/config.module';
@@ -50,6 +51,7 @@ import { CourseRoutingModule } from './course-routing.module';
     MatDialogModule,
     MatDatepickerModule,
     MatAutocompleteModule,
+    MatCheckboxModule,
     CourseRoutingModule
   ],
   exports: [

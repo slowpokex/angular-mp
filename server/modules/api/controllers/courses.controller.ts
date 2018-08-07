@@ -1,4 +1,4 @@
-import {Controller, Get, HttpCode, HttpStatus, Post, Put, Delete, Param, Body, UseGuards} from '@nestjs/common';
+import {Controller, Get, HttpCode, HttpStatus, Post, Put, Delete, Param, Body, UseGuards, Query} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
 import { CoursesService } from '../services/courses.service';
@@ -12,8 +12,12 @@ export class CoursesController {
 
   @Get()
   @HttpCode(HttpStatus.OK)
-  async findAllCourses() {
-    return this.coursesService.findAll();
+  async findAllCourses(
+    @Query('start') start: string,
+    @Query('count') count: string,
+    @Query('textFragment') textFragment: string
+  ) {
+    return this.coursesService.findAll(+start, +count, textFragment);
   }
 
   @Post()

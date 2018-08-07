@@ -15,22 +15,29 @@ export class CoursesService {
     private readonly http: HttpClient
   ) {}
 
-  getAllCourses(): Observable<Array<Course>> {
-    return this.http.get(`${this.config.getApiUrl()}/courses`, {})
+  getAllCourses(start: number = 0, count: number = 0, textFragment: string = ''): Observable<Array<Course>> {
+    return this.http.get(`${this.config.getApiUrl()}/courses`, {
+      params: {
+        start: String(start),
+        count: String(count),
+        textFragment
+      }
+    })
       .pipe(map((data: Array<Course>) => {
         return data.map((item: any) => {
+          item.id = item._id;
           item.creationDate = new Date(Date.parse(item.creationDate));
+          delete item._id;
           return item;
         });
       }));
   }
 
-  getCourseById(id: string): Observable<Course> {
+  getCourseById(id: number): Observable<Course> {
     return this.http.get<Course>(`${this.config.getApiUrl()}/courses/${id}`, {})
       .pipe(map((data: any) => {
-        // if (data.creationDate) {
-        //   data.creationDate = new Date(Date.parse(data.creationDate));
-        // }
+        data.id = data._id;
+        data.duration /= 1000;
         return data;
       }));
   }

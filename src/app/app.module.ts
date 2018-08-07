@@ -9,7 +9,7 @@ import { SharedModule } from './components/common/shared.module';
 import { LoginModule } from './components/login/login.module';
 import { ErrorModule } from './components/error/error.module';
 import { AppRoutingModule } from './app-routing.module';
-import {UserModule} from './components/user/user.module';
+import { UserModule } from './components/user/user.module';
 
 @NgModule({
   declarations: [

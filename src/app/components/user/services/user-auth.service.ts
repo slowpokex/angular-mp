@@ -51,8 +51,6 @@ export class UserAuthService {
     localStorage.setItem('current_user', JSON.stringify(jwtToken.user));
     localStorage.setItem('access_token', jwtToken.accessToken);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt));
-
-    console.log(JSON.parse(localStorage.getItem('current_user')) as User);
   }
 
   private resetSession() {
