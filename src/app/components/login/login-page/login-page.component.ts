@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {UserAuthService} from '../../user/user-auth.service';
-import {Router} from '@angular/router';
+import { UserAuthService } from '../../user/services/user-auth.service';
+import { Router } from '@angular/router';
+
+import { LoginFormData } from '../interfaces/login-form.interface';
 
 @Component({
   selector: 'app-login-page',
@@ -9,6 +11,8 @@ import {Router} from '@angular/router';
 })
 export class LoginPageComponent implements OnInit {
 
+  public user: LoginFormData = {};
+
   constructor(
     private readonly router: Router,
     private readonly userAuthService: UserAuthService
@@ -16,9 +20,9 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit() {}
 
-  onLogin(): void {
+  onLogin(event: Event): void {
     this.userAuthService
-      .login()
+      .login(this.user)
       .then(() => this.router.navigate(['/course']));
   }
 

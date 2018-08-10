@@ -1,4 +1,4 @@
-<div class="login-form">
+<form class="login-form" #loginForm="ngForm" (ngSubmit)="onLogin($event)">
   <mat-card>
     <mat-card-title>
       Please Sign In:
@@ -6,19 +6,35 @@
     <mat-card-content class="login-content">
       <div class="login-content-row">
         <mat-form-field>
-          <input type="text" matInput placeholder="Login">
+          <input type="text"
+                 id="login"
+                 name="login"
+                 matInput
+                 [(ngModel)]="user.login"
+                 #login="ngModel"
+                 required
+                 placeholder="Login"
+          >
         </mat-form-field>
       </div>
       <div class="login-content-row">
         <mat-form-field>
-          <input type="password" matInput placeholder="Password">
+          <input type="password"
+                 id="password"
+                 name="password"
+                 matInput
+                 [(ngModel)]="user.password"
+                 #password="ngModel"
+                 required
+                 placeholder="Password"
+          >
         </mat-form-field>
       </div>
       <div class="action-buttons">
-        <button mat-raised-button color="primary" (click)="onLogin()">Log In</button>
+        <button mat-raised-button color="primary" type="submit">Log In</button>
         <button mat-raised-button color="warn" (click)="onRegister()">Register</button>
       </div>
     </mat-card-content>
   </mat-card>
-</div>
+</form>
 

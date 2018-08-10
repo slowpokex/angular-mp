@@ -1,0 +1,22 @@
+version: '3.3'
+
+services:
+  app:
+    container_name: angular_node_app
+    build: ./
+    ports:
+      - "8080:8080"
+    links:
+      - mongodb
+    environment:
+      MONGODB_URI: mongodb://mongodb:27017/angular-mp
+      NODE_ENV: production
+      PORT: 8080
+      DEBUG: "false"
+    depends_on:
+      - mongodb
+  mongodb:
+    container_name: mongo_storage
+    image: mongo:latest
+    ports:
+      - "27017:27017"

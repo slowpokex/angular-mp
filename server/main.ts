@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { ApplicationModule } from './app.module';
 import { join } from 'path';
 
-import config from './config/config';
+import config from '../config/config';
 
 const PORT = config.server.port;
 const COMPILED_APP_PATH = '../dist/angular-mp';

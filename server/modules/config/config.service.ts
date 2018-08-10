@@ -20,4 +20,8 @@ export class ConfigService {
   getPort(): number {
     return this._config.server.port;
   }
+
+  getSecretKey(): string {
+    return this._config.security.secretKey;
+  }
 }

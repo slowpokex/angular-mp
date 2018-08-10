@@ -15,19 +15,19 @@ export const ROUTES: Routes = [
       breadcrumb: 'Course'
     }
   }, {
-    path: 'course/:id',
-    component: CourseFormPageComponent,
-    canActivate: [ UserAuthGuard ],
-    data: {
-      breadcrumb: 'Course/Edit Course'
-    }
-  }, {
     path: 'course/new',
     component: CourseFormPageComponent,
     canActivate: [ UserAuthGuard ],
     data: {
       breadcrumb: 'Course/Add Course'
     }
+  }, {
+    path: 'course/:id',
+    component: CourseFormPageComponent,
+    canActivate: [ UserAuthGuard ],
+    data: {
+    breadcrumb: 'Course/Edit Course'
+  }
   }
 ];
 

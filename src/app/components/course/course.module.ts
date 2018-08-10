@@ -14,8 +14,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
-import { CommonModule } from '../common/common.module';
+import { SharedModule } from '../common/shared.module';
+import { ConfigModule } from '../config/config.module';
 import { UserModule } from '../user/user.module';
 import { CoursePageComponent } from './course-page/course-page.component';
 import { CourseAddComponent } from './course-add/course-add.component';
@@ -23,7 +25,6 @@ import { CourseCardComponent } from './course-card/course-card.component';
 import { CourseListComponent } from './course-list/course-list.component';
 import { CourseSearchComponent } from './course-search/course-search.component';
 import { CoursesService } from './courses.service';
-import { ConfigService } from '../common/config/config.service';
 import { PipesModule } from '../../pipes/pipes.module';
 import { ConfirmationPopupComponent } from '../common/confirmation-popup/confirmation-popup.component';
 import { CourseFormPageComponent } from './course-form-page/course-form-page.component';
@@ -36,7 +37,8 @@ import { CourseRoutingModule } from './course-routing.module';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    CommonModule,
+    SharedModule,
+    ConfigModule,
     UserModule,
     PipesModule,
     MatButtonModule,
@@ -49,6 +51,7 @@ import { CourseRoutingModule } from './course-routing.module';
     MatDialogModule,
     MatDatepickerModule,
     MatAutocompleteModule,
+    MatCheckboxModule,
     CourseRoutingModule
   ],
   exports: [
@@ -67,7 +70,6 @@ import { CourseRoutingModule } from './course-routing.module';
     CourseFormPageComponent
   ],
   providers: [
-    ConfigService,
     CoursesService,
     { provide: DateAdapter, useClass: NativeDateAdapter },
     { provide: MAT_DATE_FORMATS, useValue: MAT_NATIVE_DATE_FORMATS }

@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck } from '@angular/core';
+import { Router } from '@angular/router';
+import { isEqual } from 'lodash';
 
-import { UserAuthService } from '../../user/user-auth.service';
+import { UserAuthService } from '../../user/services/user-auth.service';
 import { User } from '../../user/model/user';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements DoCheck {
 
   public currentUser: User = null;
   public isAuthenticated = false;
@@ -19,17 +20,19 @@ export class HeaderComponent implements OnInit {
     private readonly userAuthService: UserAuthService
   ) { }
 
-  ngOnInit(): void {
-    this.userAuthService.getChangeAuthSubscription().subscribe((isAuth: boolean) => {
-      this.isAuthenticated = isAuth;
-    });
-    this.userAuthService.getUserInfo().then((userData: User) => {
-      this.currentUser = userData;
-    });
+  ngDoCheck(): void {
+    this.isAuthenticated = this.userAuthService.isAuthenticated();
+    if (this.isAuthenticated) {
+      const newUser = this.userAuthService.getUserInfo();
+      if (!isEqual(this.currentUser, newUser)) {
+        this.currentUser = newUser;
+      }
+    }
   }
 
   onLogout() {
     this.isAuthenticated = false;
-    this.userAuthService.logout().then(() => this.router.navigate(['/login']));
+    this.userAuthService.logout()
+      .then(() => this.router.navigate(['/login']));
   }
 }

@@ -13,6 +13,10 @@ import {Router} from '@angular/router';
 })
 export class CoursePageComponent implements OnInit, OnDestroy {
   public searchQuery = '';
+  public currentPage = 1;
+  public itemsPerPage = 20;
+  public isLoaded = false;
+
   public cards: Array<Course>;
 
   constructor(
@@ -21,14 +25,18 @@ export class CoursePageComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.loadCards();
+    this.loadCards().then(() => {
+      this.isLoaded = true;
+    });
   }
 
-  loadCards(): void {
-    this.coursesService
-      .getAllCourses()
-      .subscribe((cards: Array<Course>) => {
+  async loadCards(): Promise<Array<Course>> {
+    return this.coursesService
+      .getAllCourses(this.getOffset(), this.itemsPerPage, this.searchQuery)
+      .toPromise()
+      .then((cards: Array<Course>) => {
         this.cards = cards;
+        return cards;
       });
   }
 
@@ -37,11 +45,15 @@ export class CoursePageComponent implements OnInit, OnDestroy {
   }
 
   public triggerAddPage(): void {
-    this.router.navigate(['/course/add']);
+    this.router.navigate(['/course/new']);
   }
 
-  hasCourses(): boolean {
-    return !isEmpty(this.cards);
+  getOffset(): number {
+    return this.itemsPerPage * (this.currentPage - 1);
+  }
+
+  changeSearch(): void {
+    this.loadCards();
   }
 
   editCard(course: Course) {

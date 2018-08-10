@@ -1,4 +1,6 @@
-export interface CourseModel {
+import { Document } from 'mongoose';
+
+export interface CourseModel extends Document {
   id?: number;
   title?: string;
   creationDate?: Date;

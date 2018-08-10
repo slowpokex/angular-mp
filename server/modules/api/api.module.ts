@@ -1,12 +1,20 @@
 import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
 
-import { CommonModule } from '../common/common.module';
+import { AuthModule } from '../auth/auth.module';
 import { CoursesService } from './services/courses.service';
 import { CoursesController } from './controllers/courses.controller';
+import { CourseSchema } from './schemas/course.schema';
+import { ConfigModule } from '../config/config.module';
 
 @Module({
   imports: [
-    CommonModule
+    MongooseModule.forFeature([{
+      name: 'Course',
+      schema: CourseSchema
+    }]),
+    ConfigModule,
+    AuthModule
   ],
   controllers: [
     CoursesController

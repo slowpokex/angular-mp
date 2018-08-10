@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import {Router, ActivatedRoute, ParamMap} from '@angular/router';
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
 
 import isEmpty from 'lodash/isEmpty';
-import random from 'lodash/random';
+import isNumber from 'lodash/isNumber';
+import isNaN from 'lodash/isNaN';
 
 import { Course } from '../../../models/course';
 import { CoursesService } from '../courses.service';
@@ -15,18 +15,12 @@ import { CoursesService } from '../courses.service';
   styleUrls: ['./course-form-page.component.scss']
 })
 export class CourseFormPageComponent implements OnInit {
-
-  private createUpdateAction: (body: Course) => Observable<any>;
-  // TODO: Temporary mock data. Will be added on BE
-  public users = [
-    'John Doe',
-    'Wolverine',
-    'Mystic',
-    'Dr. X'
-  ];
-
   public isEditPage = false;
-  public course: Partial<Course> = {};
+  public course: Partial<Course> = {
+    duration: 0
+  };
+
+  private createUpdateAction = (body: Course): Observable<any> => this.coursesService.updateCourse(body.id, body);
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -35,31 +29,31 @@ export class CourseFormPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // const id = this.route.snapshot.paramMap.get('id');
-    // if (id) {
-    //   this.isEditPage = true;
-    //   this.createUpdateAction = (body: Course): Observable<any> =>
-    //     !this.isEditPage ? this.coursesService.createCourse(body) : this.coursesService.updateCourse(body.id, body);
-    //   this.coursesService.getCourseById(id).subscribe((course: Partial<Course>) => {
-    //     this.course = course;
-    //   });
-    // }
-    // TODO: This is also working solution
-    this.route.paramMap.pipe(
-      switchMap((params: ParamMap) => this.coursesService.getCourseById(params.get('id')))
-    ).subscribe((course: Partial<Course>) => {
-      this.isEditPage = !isEmpty(course);
-      this.createUpdateAction = (body: Course): Observable<any> =>
-        !this.isEditPage ? this.coursesService.createCourse(body) : this.coursesService.updateCourse(body.id, body);
-      this.course = course;
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      const id = parseInt(params.get('id'), 10);
+
+      if (isNumber(id) && !isNaN(id)) {
+          this.coursesService.getCourseById(id).subscribe((course: Partial<Course>) => {
+            if (!course) {
+              return this.leaveToCoursePage();
+            }
+            this.course = course;
+            this.isEditPage = !isEmpty(course);
+          });
+      }
     });
   }
 
   onConfirmCourse(): void {
     if (!this.isEditPage) {
-      this.course.id = random(Number.MAX_SAFE_INTEGER, false);
+      this.createUpdateAction = (body: Course): Observable<any> => this.coursesService.createCourse(body);
     }
-    console.log(this.course);
+
+    // TODO: Multiplier for milliseconds
+    if (this.course.duration) {
+      this.course.duration = this.course.duration * 1000;
+    }
+
     this.createUpdateAction(this.course as Course).subscribe(() => {
       this.leaveToCoursePage();
     });
