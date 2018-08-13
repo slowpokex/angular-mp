@@ -1,7 +1,7 @@
 <div class="course-page">
   <app-course-search
     [(ngModel)]="searchQuery"
-    (searchChanged)="changeSearch()">
+    (change)="changeSearch($event)">
   </app-course-search>
   <app-course-list
     [cardList]="cards | orderBy"

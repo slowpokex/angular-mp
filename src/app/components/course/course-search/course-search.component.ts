@@ -1,7 +1,5 @@
 import { Component, forwardRef, EventEmitter, Output, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-course-search',
@@ -16,10 +14,7 @@ import { debounceTime } from 'rxjs/operators';
     }
   ]
 })
-export class CourseSearchComponent implements ControlValueAccessor, OnInit, OnDestroy {
-  private readonly searchDebouncer = new Subject<string>();
-  private searchDebouncerSubscription;
-
+export class CourseSearchComponent implements ControlValueAccessor {
   public value: string;
   public disabled = false;
 
@@ -30,20 +25,6 @@ export class CourseSearchComponent implements ControlValueAccessor, OnInit, OnDe
   public onTouched = (value: any) => {};
 
   constructor() {}
-
-  ngOnInit(): void {
-    this.searchDebouncerSubscription = this.searchDebouncer
-      .pipe(debounceTime(250))
-      .subscribe((value: string) => this.searchChanged.emit(value));
-  }
-
-  ngOnDestroy(): void {
-    this.searchDebouncerSubscription.unsubscribe();
-  }
-
-  onSearch(event: Event): void {
-    this.searchDebouncer.next(this.value);
-  }
 
   writeValue(obj: any): void {
     this.value = obj;
