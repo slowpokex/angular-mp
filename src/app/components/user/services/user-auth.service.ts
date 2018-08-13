@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, ReplaySubject, forkJoin } from 'rxjs';
+import { Observable, ReplaySubject, of } from 'rxjs';
 import { tap, shareReplay } from 'rxjs/operators';
 import * as moment from 'moment';
 
@@ -37,12 +37,12 @@ export class UserAuthService {
     console.log('Register user');
   }
 
-  isAuthenticated(): boolean {
-    return moment().isBefore(this.getExpiration());
+  isAuthenticated(): Observable<boolean> {
+    return of(moment().isBefore(this.getExpiration()));
   }
 
-  getUserInfo(): User {
-    return JSON.parse(localStorage.getItem('current_user')) as User;
+  getUserInfo(): Observable<User> {
+    return of(JSON.parse(localStorage.getItem('current_user')) as User);
   }
 
   private setSession(jwtToken: Token) {

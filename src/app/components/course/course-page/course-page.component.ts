@@ -21,6 +21,7 @@ export class CoursePageComponent implements OnInit, OnDestroy {
   public currentPage = 1;
   public itemsPerPage = 20;
   public isLoaded = false;
+  public isCardLoading = false;
 
   public cards: Array<Course>;
 
@@ -47,12 +48,18 @@ export class CoursePageComponent implements OnInit, OnDestroy {
   }
 
   async loadCards(): Promise<Array<Course>> {
+    this.isCardLoading = true;
     return this.coursesService
       .getAllCourses(this.getOffset(), this.itemsPerPage, this.searchQuery)
       .toPromise()
       .then((cards: Array<Course>) => {
         this.cards = cards;
+        this.isCardLoading = false;
         return cards;
+      })
+      .catch(() => {
+        this.isCardLoading = false;
+        return [];
       });
   }
 
