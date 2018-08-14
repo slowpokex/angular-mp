@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import {Observable, Subject} from 'rxjs';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+
 import { UserAuthService } from './services/user-auth.service';
 
 @Injectable()
@@ -11,12 +13,11 @@ export class UserAuthGuard implements CanActivate {
   ) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    return Observable.create((observer: Subject<boolean>) => {
-      if (this.userAuthService.isAuthenticated()) {
-        return observer.next(true);
-      }
-      this.router.navigate(['/login']);
-      return observer.next(false);
-    });
+    return this.userAuthService.isAuthenticated()
+      .pipe(tap((isAuthenticated: boolean) => {
+        if (!isAuthenticated) {
+          this.router.navigate(['/login']);
+        }
+      }));
   }
 }
