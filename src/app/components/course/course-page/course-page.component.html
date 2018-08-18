@@ -1,11 +1,13 @@
 <div class="course-page">
   <app-course-search
     [(ngModel)]="searchQuery"
-    (searchChanged)="changeSearch()">
+    (change)="changeSearch()">
   </app-course-search>
-  <app-course-list
-    [cardList]="cards | orderBy"
-    (editCardEvent)="editCard($event)"
-    (deleteCardEvent)="deleteCard($event)"></app-course-list>
+  <app-loader [isLoading]="isCardLoading">
+    <app-course-list
+      [cardList]="cards | orderBy"
+      (editCardEvent)="editCard($event)"
+      (deleteCardEvent)="deleteCard($event)"></app-course-list>
+  </app-loader>
   <app-course-add (onOpenAdd)="triggerAddPage()"></app-course-add>
 </div>

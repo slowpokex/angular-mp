@@ -8,7 +8,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./course-add.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CourseAddComponent implements OnInit {
+export class CourseAddComponent  {
 
   @Output()
   public readonly onOpenAdd = new EventEmitter<void>();
@@ -18,8 +18,6 @@ export class CourseAddComponent implements OnInit {
         'add',
         sanitizer.bypassSecurityTrustResourceUrl('assets/icons/baseline-add-24px.svg'));
   }
-
-  ngOnInit() {}
 
   openAddPage(): void {
     this.onOpenAdd.emit();

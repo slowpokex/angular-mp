@@ -4,6 +4,7 @@ import { isEqual } from 'lodash';
 
 import { UserAuthService } from '../../user/services/user-auth.service';
 import { User } from '../../user/model/user';
+import {filter, switchMap, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -21,13 +22,14 @@ export class HeaderComponent implements DoCheck {
   ) { }
 
   ngDoCheck(): void {
-    this.isAuthenticated = this.userAuthService.isAuthenticated();
-    if (this.isAuthenticated) {
-      const newUser = this.userAuthService.getUserInfo();
-      if (!isEqual(this.currentUser, newUser)) {
-        this.currentUser = newUser;
-      }
-    }
+    this.userAuthService.isAuthenticated()
+      .pipe(
+        tap((isAuth: boolean) => this.isAuthenticated = isAuth),
+        filter((isAuth: boolean) => isAuth),
+        switchMap(() => this.userAuthService.getUserInfo()),
+        filter((newUser: User) => !isEqual(this.currentUser, newUser))
+      )
+      .subscribe((newUser: User) => this.currentUser = newUser);
   }
 
   onLogout() {

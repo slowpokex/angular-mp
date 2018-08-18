@@ -15,6 +15,7 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { ConfirmationPopupComponent } from './confirmation-popup/confirmation-popup.component';
+import { LoaderComponent } from './loader/loader.component';
 
 
 @NgModule({
@@ -34,13 +35,15 @@ import { ConfirmationPopupComponent } from './confirmation-popup/confirmation-po
     HeaderComponent,
     BreadcrumbsComponent,
     FooterComponent,
-    ConfirmationPopupComponent
+    ConfirmationPopupComponent,
+    LoaderComponent
   ],
   declarations: [
     HeaderComponent,
     BreadcrumbsComponent,
     FooterComponent,
-    ConfirmationPopupComponent
+    ConfirmationPopupComponent,
+    LoaderComponent
   ],
   providers: []
 })

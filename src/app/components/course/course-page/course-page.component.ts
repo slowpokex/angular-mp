@@ -1,10 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { debounceTime, filter } from 'rxjs/operators';
 
 import isEmpty from 'lodash/isEmpty';
 
 import { Course } from '../../../models/course';
 import { CoursesService } from '../courses.service';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-course-page',
@@ -12,10 +14,14 @@ import {Router} from '@angular/router';
   styleUrls: ['./course-page.component.scss']
 })
 export class CoursePageComponent implements OnInit, OnDestroy {
+  private readonly searchDebouncer = new Subject<string>();
+  private searchDebouncerSubscription;
+
   public searchQuery = '';
   public currentPage = 1;
   public itemsPerPage = 20;
   public isLoaded = false;
+  public isCardLoading = false;
 
   public cards: Array<Course>;
 
@@ -28,20 +34,33 @@ export class CoursePageComponent implements OnInit, OnDestroy {
     this.loadCards().then(() => {
       this.isLoaded = true;
     });
+    this.searchDebouncerSubscription = this.searchDebouncer
+      .pipe(
+        filter((val: string) => val.length >= 3 || isEmpty(val)),
+        debounceTime(250)
+      )
+      .subscribe(() => this.loadCards());
+  }
+
+  ngOnDestroy(): void {
+    this.cards = [];
+    this.searchDebouncerSubscription.unsubscribe();
   }
 
   async loadCards(): Promise<Array<Course>> {
+    this.isCardLoading = true;
     return this.coursesService
       .getAllCourses(this.getOffset(), this.itemsPerPage, this.searchQuery)
       .toPromise()
       .then((cards: Array<Course>) => {
         this.cards = cards;
+        this.isCardLoading = false;
         return cards;
+      })
+      .catch(() => {
+        this.isCardLoading = false;
+        return [];
       });
-  }
-
-  ngOnDestroy(): void {
-    this.cards = [];
   }
 
   public triggerAddPage(): void {
@@ -53,7 +72,7 @@ export class CoursePageComponent implements OnInit, OnDestroy {
   }
 
   changeSearch(): void {
-    this.loadCards();
+    this.searchDebouncer.next(this.searchQuery);
   }
 
   editCard(course: Course) {
