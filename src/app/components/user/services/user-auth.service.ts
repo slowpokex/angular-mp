@@ -38,22 +38,21 @@ export class UserAuthService {
     return moment(expiresAt);
   }
 
-  public getChangeAuthSubscription(): Observable<boolean> {
-    return this.onChangeAuth;
-  }
-
-  public async login(userData: LoginFormData): Promise<any> {
+  public login(userData: LoginFormData): Observable<any> {
     return this.http.post(this.config.getAuthUrl(), userData)
-      .pipe(tap(UserAuthService.setSession), shareReplay()).toPromise();
+      .pipe(
+        tap(UserAuthService.setSession),
+        shareReplay()
+      );
   }
 
-  public async logout(): Promise<void> {
-    return UserAuthService.resetSession();
+  public logout(): Observable<void> {
+    return of(UserAuthService.resetSession());
   }
 
   // TODO: Need to implement register logic
-  async register(): Promise<any> {
-    console.log('Register user');
+  public register(): Observable<any> {
+    return of('Will be implemented later!');
   }
 
   public isAuthenticated(): Observable<boolean> {

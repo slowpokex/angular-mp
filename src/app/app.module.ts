@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
 import { CourseModule } from './components/course/course.module';
@@ -19,6 +20,7 @@ import { UserModule } from './components/user/user.module';
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    StoreModule.forRoot({}),
     UserModule,
     SharedModule,
     LoginModule,
