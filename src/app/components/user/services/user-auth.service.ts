@@ -38,7 +38,7 @@ export class UserAuthService {
     return moment(expiresAt);
   }
 
-  public login(userData: LoginFormData): Observable<any> {
+  public login(userData: LoginFormData): Observable<Token> {
     return this.http.post(this.config.getAuthUrl(), userData)
       .pipe(
         tap(UserAuthService.setSession),

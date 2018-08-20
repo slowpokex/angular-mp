@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserAuthService } from '../../user/services/user-auth.service';
-import { Router } from '@angular/router';
+import { Store, select } from '@ngrx/store';
+import * as fromAuth from '../../user/reducers';
+import * as Auth from '../../user/actions/user-auth';
 
 import { LoginFormData } from '../interfaces/login-form.interface';
 
@@ -10,23 +11,19 @@ import { LoginFormData } from '../interfaces/login-form.interface';
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent implements OnInit {
+  pending$ = this.store.pipe(select(fromAuth.getLoginPagePending));
+  error$ = this.store.pipe(select(fromAuth.getLoginPageError));
+  user: LoginFormData = {};
 
-  public user: LoginFormData = {};
-
-  constructor(
-    private readonly router: Router,
-    private readonly userAuthService: UserAuthService
-  ) { }
+  constructor(private store: Store<fromAuth.State>) { }
 
   ngOnInit() {}
 
   onLogin(event: Event): void {
-    this.userAuthService
-      .login(this.user)
-      .then(() => this.router.navigate(['/course']));
+    this.store.dispatch(new Auth.Login(this.user));
   }
 
   onRegister(): void {
-    this.userAuthService.register();
+    // this.userAuthService.register();
   }
 }

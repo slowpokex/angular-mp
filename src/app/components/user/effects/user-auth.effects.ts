@@ -24,7 +24,7 @@ export class AuthEffects {
             this.userAuthService
                 .login(auth)
                 .pipe(
-                    map(user => new LoginSuccess({ user })),
+                    map(userData => new LoginSuccess({ userData })),
                     catchError(error => of(new LoginFailure(error)))
                 )
         )
