@@ -1,4 +1,6 @@
-import { AuthActionTypes, AuthActions } from './../actions/user-auth';
+import get from 'lodash/get';
+
+import { AuthActionTypes, AuthActions } from '../actions/user-auth';
 
 export interface State {
   error: string | null;
@@ -42,5 +44,5 @@ export function reducer(state = initialState, action: AuthActions): State {
   }
 }
 
-export const getError = (state: State) => state.error;
-export const getPending = (state: State) => state.pending;
+export const getError = (state: State) => get(state, 'error');
+export const getPending = (state: State) => get(state, 'pending');

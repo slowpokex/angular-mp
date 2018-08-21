@@ -1,4 +1,6 @@
-import { AuthActions, AuthActionTypes } from './../actions/user-auth';
+import get from 'lodash/get';
+
+import { AuthActions, AuthActionTypes } from '../actions/user-auth';
 import { Token } from '../model/token';
 
 export interface State {
@@ -31,6 +33,6 @@ export function reducer(state = initialState, action: AuthActions): State {
   }
 }
 
-export const getLoggedIn = (state: State) => state.loggedIn;
-export const getToken = (state: State) => state.userData;
-export const getUser = (state: State) => state.userData.user;
+export const getLoggedIn = (state: State) => get(state, 'loggedIn');
+export const getToken = (state: State) => get(state, 'userData');
+export const getUser = (state: State) => get(state, 'userData.user');

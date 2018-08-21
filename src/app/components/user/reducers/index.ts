@@ -33,7 +33,7 @@ export const getLoggedIn = createSelector(
 );
 
 export const getUser = createSelector(selectAuthStatusState, fromAuth.getUser);
-export const getToken= createSelector(selectAuthStatusState, fromAuth.getToken);
+export const getToken = createSelector(selectAuthStatusState, fromAuth.getToken);
 
 export const selectLoginPageState = createSelector(
   selectAuthState,

@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { CourseFormPageComponent } from './course-form-page/course-form-page.component';
 import { CoursePageComponent } from './course-page/course-page.component';
-import { UserAuthGuard } from '../user/user-auth.guard';
+import { UserAuthGuard } from '../user/services/user-auth.guard';
 import { UserModule } from '../user/user.module';
 
 export const ROUTES: Routes = [
