@@ -3,9 +3,9 @@
     [(ngModel)]="searchQuery"
     (change)="changeSearch()">
   </app-course-search>
-  <app-loader [isLoading]="isCardLoading">
+  <app-loader [isLoading]="cardsPending$ | async">
     <app-course-list
-      [cardList]="cards | orderBy"
+      [cardList]="cards$ | async | orderBy"
       (editCardEvent)="editCard($event)"
       (deleteCardEvent)="deleteCard($event)"></app-course-list>
   </app-loader>
