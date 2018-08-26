@@ -18,25 +18,45 @@ export class UserAuthService {
     private readonly http: HttpClient
   ) {}
 
-  // private static setSession(jwtToken: Token) {
-  //   const expiresAt = moment().add(jwtToken.expiresIn, 'second');
+  public static setSession(jwtToken: Token) {
+    const expiresAt = moment().add(jwtToken.expiresIn, 'second');
 
-  //   localStorage.setItem('current_user', JSON.stringify(jwtToken.user));
-  //   localStorage.setItem('access_token', jwtToken.accessToken);
-  //   localStorage.setItem('expires_at', JSON.stringify(expiresAt));
-  // }
+    localStorage.setItem('current_user', JSON.stringify(jwtToken.user));
+    localStorage.setItem('access_token', jwtToken.accessToken);
+    localStorage.setItem('expires_at', JSON.stringify(expiresAt));
+  }
 
-  // private static resetSession() {
-  //   localStorage.removeItem('current_user');
-  //   localStorage.removeItem('access_token');
-  //   localStorage.removeItem('expires_at');
-  // }
+  public static resetSession() {
+    localStorage.removeItem('current_user');
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('expires_at');
+  }
 
-  // private static getExpiration() {
-  //   const expiration = localStorage.getItem('expires_at');
-  //   const expiresAt = JSON.parse(expiration);
-  //   return moment(expiresAt);
-  // }
+  public static getExpiration() {
+    const expiration = localStorage.getItem('expires_at');
+    const expiresAt = JSON.parse(expiration);
+    return moment(expiresAt);
+  }
+
+  public static isAuthenticated(): boolean {
+    return moment().isBefore(UserAuthService.getExpiration());
+  }
+
+  public static getToken(): Token {
+    return {
+      user: UserAuthService.getUserInfo(),
+      expiresIn: UserAuthService.getExpiration().milliseconds(),
+      accessToken: UserAuthService.getAccessToken()
+    }
+  }
+
+  public static getAccessToken(): string {
+    return localStorage.getItem('access_token');
+  }
+
+  public static getUserInfo(): User {
+    return JSON.parse(localStorage.getItem('current_user')) as User;
+  }
 
   public login(userData: LoginFormData): Observable<Token> {
     return this.http.post<Token>(this.config.getAuthUrl(), userData);
@@ -50,12 +70,4 @@ export class UserAuthService {
   public register(): Observable<any> {
     return of('Will be implemented later!');
   }
-
-  // public isAuthenticated(): Observable<boolean> {
-  //   return of(moment().isBefore(UserAuthService.getExpiration()));
-  // }
-
-  // public getUserInfo(): Observable<User> {
-  //   return of(JSON.parse(localStorage.getItem('current_user')) as User);
-  // }
 }

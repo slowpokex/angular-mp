@@ -2,6 +2,7 @@ import get from 'lodash/get';
 
 import { AuthActions, AuthActionTypes } from '../actions/user-auth';
 import { Token } from '../model/token';
+import { UserAuthService } from '../services/user-auth.service';
 
 export interface State {
   loggedIn: boolean;
@@ -9,8 +10,8 @@ export interface State {
 }
 
 export const initialState: State = {
-  loggedIn: false,
-  userData: null,
+  loggedIn: UserAuthService.isAuthenticated(),
+  userData: UserAuthService.getToken(),
 };
 
 export function reducer(state = initialState, action: AuthActions): State {

@@ -36,7 +36,49 @@ export class LoadAllCoursesFailture implements Action {
     constructor(public payload: any) { }
 }
 
+export class EditCourse implements Action {
+    readonly type = CourseActionTypes.LoadAllCourses;
+
+    constructor(public payload: Course) { }
+}
+
+export class EditCourseSuccess implements Action {
+    readonly type = CourseActionTypes.LoadAllCoursesSuccess;
+
+    constructor(public payload: Course) { }
+}
+
+export class EditCourseFailture implements Action {
+    readonly type = CourseActionTypes.LoadAllCoursesFailture;
+
+    constructor(public payload: any) { } 
+}
+
+export class DeleteCourse implements Action {
+    readonly type = CourseActionTypes.LoadAllCourses;
+
+    constructor(public payload: number) { }
+}
+
+export class DeleteCourseSuccess implements Action {
+    readonly type = CourseActionTypes.LoadAllCoursesSuccess;
+
+    constructor(public payload: Course) { }
+}
+
+export class DeleteCourseFailture implements Action {
+    readonly type = CourseActionTypes.LoadAllCoursesFailture;
+
+    constructor(public payload: any) { } 
+}
+
 export type CourseActions =
     | LoadAllCourses
     | LoadAllCoursesSuccess
-    | LoadAllCoursesFailture;
+    | LoadAllCoursesFailture
+    | EditCourse
+    | EditCourseSuccess
+    | EditCourseFailture
+    | DeleteCourse
+    | DeleteCourseSuccess
+    | DeleteCourseFailture;
