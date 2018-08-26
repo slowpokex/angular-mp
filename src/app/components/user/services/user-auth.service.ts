@@ -18,49 +18,44 @@ export class UserAuthService {
     private readonly http: HttpClient
   ) {}
 
-  private static setSession(jwtToken: Token) {
-    const expiresAt = moment().add(jwtToken.expiresIn, 'second');
+  // private static setSession(jwtToken: Token) {
+  //   const expiresAt = moment().add(jwtToken.expiresIn, 'second');
 
-    localStorage.setItem('current_user', JSON.stringify(jwtToken.user));
-    localStorage.setItem('access_token', jwtToken.accessToken);
-    localStorage.setItem('expires_at', JSON.stringify(expiresAt));
+  //   localStorage.setItem('current_user', JSON.stringify(jwtToken.user));
+  //   localStorage.setItem('access_token', jwtToken.accessToken);
+  //   localStorage.setItem('expires_at', JSON.stringify(expiresAt));
+  // }
+
+  // private static resetSession() {
+  //   localStorage.removeItem('current_user');
+  //   localStorage.removeItem('access_token');
+  //   localStorage.removeItem('expires_at');
+  // }
+
+  // private static getExpiration() {
+  //   const expiration = localStorage.getItem('expires_at');
+  //   const expiresAt = JSON.parse(expiration);
+  //   return moment(expiresAt);
+  // }
+
+  public login(userData: LoginFormData): Observable<Token> {
+    return this.http.post<Token>(this.config.getAuthUrl(), userData);
   }
 
-  private static resetSession() {
-    localStorage.removeItem('current_user');
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('expires_at');
-  }
-
-  private static getExpiration() {
-    const expiration = localStorage.getItem('expires_at');
-    const expiresAt = JSON.parse(expiration);
-    return moment(expiresAt);
-  }
-
-  public getChangeAuthSubscription(): Observable<boolean> {
-    return this.onChangeAuth;
-  }
-
-  public async login(userData: LoginFormData): Promise<any> {
-    return this.http.post(this.config.getAuthUrl(), userData)
-      .pipe(tap(UserAuthService.setSession), shareReplay()).toPromise();
-  }
-
-  public async logout(): Promise<void> {
-    return UserAuthService.resetSession();
-  }
+  // public logout(): Observable<void> {
+  //   return of(UserAuthService.resetSession());
+  // }
 
   // TODO: Need to implement register logic
-  async register(): Promise<any> {
-    console.log('Register user');
+  public register(): Observable<any> {
+    return of('Will be implemented later!');
   }
 
-  public isAuthenticated(): Observable<boolean> {
-    return of(moment().isBefore(UserAuthService.getExpiration()));
-  }
+  // public isAuthenticated(): Observable<boolean> {
+  //   return of(moment().isBefore(UserAuthService.getExpiration()));
+  // }
 
-  public getUserInfo(): Observable<User> {
-    return of(JSON.parse(localStorage.getItem('current_user')) as User);
-  }
+  // public getUserInfo(): Observable<User> {
+  //   return of(JSON.parse(localStorage.getItem('current_user')) as User);
+  // }
 }

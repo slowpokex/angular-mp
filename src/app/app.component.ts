@@ -6,15 +6,6 @@ import { UserAuthService } from './components/user/services/user-auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
-
-  public isAuthenticated = false;
-
-  constructor(private readonly userAuthService: UserAuthService) {}
-
-  ngOnInit(): void {
-    this.userAuthService.getChangeAuthSubscription().subscribe((isAuth: boolean) => {
-      this.isAuthenticated = isAuth;
-    });
-  }
+export class AppComponent {
+  constructor() {}
 }

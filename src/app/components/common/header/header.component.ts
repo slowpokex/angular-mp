@@ -1,40 +1,32 @@
 import { Component, DoCheck } from '@angular/core';
 import { Router } from '@angular/router';
-import { isEqual } from 'lodash';
+import { Observable } from 'rxjs';
+import { filter, switchMap, tap } from 'rxjs/operators';
+import isEqual from 'lodash/isEqual';
+import { Store, select } from '@ngrx/store';
 
 import { UserAuthService } from '../../user/services/user-auth.service';
 import { User } from '../../user/model/user';
-import {filter, switchMap, tap} from 'rxjs/operators';
+
+import * as fromRoot from '../../../reducers';
+import * as fromAuth from '../../user/reducers';
+import * as Auth from '../../user/actions/user-auth';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements DoCheck {
+export class HeaderComponent {
+  public loggedIn$: Observable<boolean>;
+  public currentUser$: Observable<User>;
 
-  public currentUser: User = null;
-  public isAuthenticated = false;
-
-  constructor(
-    private readonly router: Router,
-    private readonly userAuthService: UserAuthService
-  ) { }
-
-  ngDoCheck(): void {
-    this.userAuthService.isAuthenticated()
-      .pipe(
-        tap((isAuth: boolean) => this.isAuthenticated = isAuth),
-        filter((isAuth: boolean) => isAuth),
-        switchMap(() => this.userAuthService.getUserInfo()),
-        filter((newUser: User) => !isEqual(this.currentUser, newUser))
-      )
-      .subscribe((newUser: User) => this.currentUser = newUser);
+  constructor(private store: Store<fromRoot.AppState>) {
+    this.loggedIn$ = this.store.pipe(select(fromAuth.getLoggedIn));
+    this.currentUser$ = this.store.pipe(select(fromAuth.getUser));
   }
 
   onLogout() {
-    this.isAuthenticated = false;
-    this.userAuthService.logout()
-      .then(() => this.router.navigate(['/login']));
+    this.store.dispatch(new Auth.Logout());
   }
 }

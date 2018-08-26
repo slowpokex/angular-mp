@@ -26,9 +26,9 @@ export class BreadcrumbsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.userAuthService.getChangeAuthSubscription().subscribe((isAuth: boolean) => {
-      this.isAuthenticated = isAuth;
-    });
+    // this.userAuthService.getChangeAuthSubscription().subscribe((isAuth: boolean) => {
+    //   this.isAuthenticated = isAuth;
+    // });
     this.$breadcrumbs = this.router.events
       .pipe(
         filter(event => event instanceof NavigationEnd),

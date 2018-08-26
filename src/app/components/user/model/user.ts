@@ -12,3 +12,8 @@ export interface User {
   role: UserRoleEnum;
   lastModifiedDate?: Date;
 }
+
+export interface UserAuthenticate {
+  login?: string;
+  password?: string;
+}

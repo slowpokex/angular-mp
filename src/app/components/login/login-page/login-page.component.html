@@ -34,6 +34,9 @@
         <button mat-raised-button color="primary" type="submit">Log In</button>
         <button mat-raised-button color="warn" (click)="onRegister()">Register</button>
       </div>
+      <div class="error-block" *ngIf="error$ | async">
+        {{ (error$ | async)?.error?.message }}
+      </div>
     </mat-card-content>
   </mat-card>
 </form>

@@ -2,9 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
+import { Store, select } from '@ngrx/store';
 
 import isEmpty from 'lodash/isEmpty';
 
+import * as fromCourses from '../reducers';
+import * as CourseActions from '../actions/course';
 import { Course } from '../../../models/course';
 import { CoursesService } from '../courses.service';
 
@@ -20,20 +23,18 @@ export class CoursePageComponent implements OnInit, OnDestroy {
   public searchQuery = '';
   public currentPage = 1;
   public itemsPerPage = 20;
-  public isLoaded = false;
-  public isCardLoading = false;
 
-  public cards: Array<Course>;
+  public cards$ = this.store.pipe(select(fromCourses.getAllCourses));
+  public cardsPending$ = this.store.pipe(select(fromCourses.getCoursePending));
 
   constructor(
     private readonly router: Router,
-    private readonly coursesService: CoursesService
+    private readonly coursesService: CoursesService,
+    private store: Store<fromCourses.State>
   ) { }
 
   ngOnInit(): void {
-    this.loadCards().then(() => {
-      this.isLoaded = true;
-    });
+    this.loadCards();
     this.searchDebouncerSubscription = this.searchDebouncer
       .pipe(
         filter((val: string) => val.length >= 3 || isEmpty(val)),
@@ -43,24 +44,15 @@ export class CoursePageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.cards = [];
     this.searchDebouncerSubscription.unsubscribe();
   }
 
-  async loadCards(): Promise<Array<Course>> {
-    this.isCardLoading = true;
-    return this.coursesService
-      .getAllCourses(this.getOffset(), this.itemsPerPage, this.searchQuery)
-      .toPromise()
-      .then((cards: Array<Course>) => {
-        this.cards = cards;
-        this.isCardLoading = false;
-        return cards;
-      })
-      .catch(() => {
-        this.isCardLoading = false;
-        return [];
-      });
+  public loadCards(): void {
+    this.store.dispatch(new CourseActions.LoadAllCourses({
+      start: this.getOffset(),
+      count: this.itemsPerPage,
+      textFragment: this.searchQuery,
+    }));
   }
 
   public triggerAddPage(): void {
