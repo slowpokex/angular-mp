@@ -5,6 +5,9 @@ export enum CourseActionTypes {
     LoadAllCourses = '[Course] Load All Courses',
     LoadAllCoursesSuccess = '[Course] Load All Courses Success',
     LoadAllCoursesFailture = '[Course] Load All Courses Success',
+    CreateCourse = '[Auth] Create Course',
+    CreateCourseSuccess = '[Auth] Create Course Success',
+    CreateCourseFailture = '[Auth] Create Course Failture',
     EditCourse = '[Auth] Edit Course',
     EditCourseSuccess = '[Auth] Edit Course Success',
     EditCourseFailture = '[Auth] Edit Course Failture',
@@ -34,6 +37,24 @@ export class LoadAllCoursesFailture implements Action {
     readonly type = CourseActionTypes.LoadAllCoursesFailture;
 
     constructor(public payload: any) { }
+}
+
+export class CreateCourse implements Action {
+    readonly type = CourseActionTypes.LoadAllCourses;
+
+    constructor(public payload: Course) { }
+}
+
+export class CreateCourseSuccess implements Action {
+    readonly type = CourseActionTypes.LoadAllCoursesSuccess;
+
+    constructor(public payload: Course) { }
+}
+
+export class CreateCourseFailture implements Action {
+    readonly type = CourseActionTypes.LoadAllCoursesFailture;
+
+    constructor(public payload: any) { } 
 }
 
 export class EditCourse implements Action {
@@ -76,6 +97,9 @@ export type CourseActions =
     | LoadAllCourses
     | LoadAllCoursesSuccess
     | LoadAllCoursesFailture
+    | CreateCourse
+    | CreateCourseSuccess
+    | CreateCourseFailture
     | EditCourse
     | EditCourseSuccess
     | EditCourseFailture

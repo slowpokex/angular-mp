@@ -4,12 +4,13 @@ import {
     ActionReducerMap,
 } from '@ngrx/store';
 import * as fromRoot from '../../../reducers';
-import { Course } from '../../../models/course';
 
 import * as fromCourses from './courses';
+import * as fromCourseForm from './course-form';
 
 export interface CoursesState {
     courses: fromCourses.State;
+    course: fromCourseForm.State;
 }
 
 export interface State extends fromRoot.AppState {
@@ -17,7 +18,8 @@ export interface State extends fromRoot.AppState {
 }
 
 export const reducers: ActionReducerMap<CoursesState> = {
-    courses: fromCourses.reducer
+    courses: fromCourses.reducer,
+    course: fromCourseForm.reducer
 };
 
 export const selectCoursesState = createFeatureSelector<CoursesState>('courses');

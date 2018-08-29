@@ -1,22 +1,22 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ConfirmationPopupComponent } from './confirmation-popup.component';
+import { DateInputComponent } from './date-input.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
-describe('ConfirmationPopupComponent', () => {
-  let component: ConfirmationPopupComponent;
-  let fixture: ComponentFixture<ConfirmationPopupComponent>;
+describe('DateInputComponent', () => {
+  let component: DateInputComponent;
+  let fixture: ComponentFixture<DateInputComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ConfirmationPopupComponent ],
+      declarations: [ DateInputComponent ],
       schemas: [NO_ERRORS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ConfirmationPopupComponent);
+    fixture = TestBed.createComponent(DateInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

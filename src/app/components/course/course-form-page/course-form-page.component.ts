@@ -84,16 +84,22 @@ export class CourseFormPageComponent implements OnInit {
   }
 
   onConfirmCourse(): void {
+    if (this.courseForm.invalid || this.courseForm.pending) {
+      return;
+    }
+
+    const course = this.courseForm.getRawValue() as Course;
+
     if (!this.isEditPage) {
       this.createUpdateAction = (body: Course): Observable<any> => this.coursesService.createCourse(body);
     }
 
     // TODO: Multiplier for milliseconds
-    // if (this.course.duration) {
-    //   this.course.duration = this.course.duration * 1000;
-    // }
+    if (course.duration) {
+      course.duration = course.duration * 1000;
+    }
 
-    this.createUpdateAction(this.courseForm.getRawValue() as Course).subscribe(() => {
+    this.createUpdateAction(course).subscribe(() => {
       this.leaveToCoursePage();
     });
   }
