@@ -1,21 +1,22 @@
-<div class="add-course-form">
+<form [formGroup]="courseForm" class="add-course-form">
   <mat-card>
     <mat-card-title>
       {{ isEditPage ? 'Edit course' : 'Add new course'}}
     </mat-card-title>
     <mat-card-content class="form-content">
+      <input id="courseId" type="hidden" formControlName="id">
       <div class="form-content-row">
         <mat-form-field>
           <input matInput
                  type="text"
-                 [(ngModel)]="course.title"
+                 formControlName="title"
                  placeholder="Title">
         </mat-form-field>
       </div>
       <div class="form-content-row">
         <mat-form-field>
           <textarea matInput
-                    [(ngModel)]="course.description"
+                    formControlName="description"
                     placeholder="Description">
           </textarea>
         </mat-form-field>
@@ -24,38 +25,40 @@
         <mat-form-field>
           <input matInput
                  type="text"
-                 [(ngModel)]="course.photoUrl"
+                 formControlName="photoUrl"
                  placeholder="Photo url">
         </mat-form-field>
       </div>
       <div>
-        <mat-form-field>
-          <input matInput
-                 [(ngModel)]="course.creationDate"
+        <!-- <mat-form-field>
+           <input matInput
+                 formControlName="creationDate"
                  [matDatepicker]="picker"
                  placeholder="Choose a date">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
+          <mat-datepicker #picker></mat-datepicker>          
+        </mat-form-field> -->
+        <!-- Working solution, but some ugly -->
+        <app-date-input formControlName="creationDate"></app-date-input>
       </div>
       <div class="form-content-row-short">
         <mat-form-field>
           <input matInput
-                 type="number"
-                 [(ngModel)]="course.duration"
-                 placeholder="Duration">
+          type="number"
+          formControlName="duration"
+          placeholder="Duration">
         </mat-form-field>
-        <span class="label">{{ course.duration * 1000 | date: 'mm:ss' }}</span>
+        <span class="label">{{ courseForm.get('duration').value * 1000 | date: 'mm:ss' }}</span>
       </div>
       <div class="form-content-row-short">
         <div class="label">
-          <mat-checkbox [(ngModel)]="course.topRated">Make top rated!</mat-checkbox>
+          <mat-checkbox formControlName="topRated">Make top rated!</mat-checkbox>
         </div>
       </div>
       <div class="action-buttons">
-        <button mat-raised-button color="primary" (click)="onConfirmCourse()">{{ isEditPage ? 'Edit': 'Add' }} course</button>
+        <button mat-raised-button color="primary" [disabled]="courseForm.invalid" (click)="onConfirmCourse()">{{ isEditPage ? 'Edit': 'Add' }} course</button>
         <button mat-raised-button color="warn" (click)="onBack()">Back to course</button>
       </div>
     </mat-card-content>
   </mat-card>
-</div>
+</form>

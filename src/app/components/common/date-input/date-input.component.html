@@ -1,0 +1,7 @@
+<div class="date-input">
+    <input type="text"
+           placeholder="dd/MM/yyyy"
+           [(ngModel)]="_value"
+           (ngModelChange)="onChange($event)"
+           (blur)="_onTouched($event)">
+</div>

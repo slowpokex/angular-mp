@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 
 import { of } from 'rxjs';
 import { tap, map, exhaustMap, catchError } from 'rxjs/operators';
@@ -13,9 +14,11 @@ import {
 } from '../actions/user-auth';
 import { UserAuthService } from '../services/user-auth.service';
 import { LoginFormData } from '../../login/interfaces/login-form.interface';
+import { Token } from '../model/token';
 
 @Injectable()
 export class AuthEffects {
+
     @Effect()
     login$ = this.actions$.pipe(
         ofType(AuthActionTypes.Login),
@@ -24,7 +27,7 @@ export class AuthEffects {
             this.userAuthService
                 .login(auth)
                 .pipe(
-                    map(userData => new LoginSuccess({ userData })),
+                    map((userData: Token) => new LoginSuccess({ userData })),
                     catchError(error => of(new LoginFailure(error)))
                 )
         )
@@ -33,6 +36,7 @@ export class AuthEffects {
     @Effect({ dispatch: false })
     loginSuccess$ = this.actions$.pipe(
         ofType(AuthActionTypes.LoginSuccess),
+        tap((data: LoginSuccess) => UserAuthService.setSession(data.payload.userData)),
         tap(() => this.router.navigate(['/course']))
     );
 
@@ -42,6 +46,12 @@ export class AuthEffects {
         tap(authed => {
             this.router.navigate(['/login']);
         })
+    );
+
+    @Effect({ dispatch: false })
+    logoutSuccess$ = this.actions$.pipe(
+        ofType(AuthActionTypes.Logout),
+        tap(UserAuthService.resetSession)
     );
 
     constructor(
